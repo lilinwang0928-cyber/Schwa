@@ -992,7 +992,10 @@ function speakSeq(full,words,rate,gap,onWord,tag){
   function next(){
     if(tok!==VOICE.seq) return;
     if(i>=words.length){ VOICE.cur=null; VOICE.u=null; if(onWord) onWord(-1); markPlaying(); return; }
-    var u=new SpeechSynthesisUtterance(words[i]);
+    /* 單獨一個字送進語音引擎時，「I」常被當成字母或羅馬數字；只改送出的文字，畫面不變 */
+    var w=words[i], bare=w.replace(/[.,!?;:]+$/,'');
+    var spoken=(bare==='I')?w.replace(/^I/,'eye'):w;
+    var u=new SpeechSynthesisUtterance(spoken);
     u.lang='en-US'; if(v) u.voice=v; u.rate=rate; u.pitch=1;
     if(onWord) onWord(i);
     VOICE.u=u;
