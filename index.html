@@ -99,6 +99,19 @@ h2.sec:first-child{margin-top:0}
   min-height:2.2em; letter-spacing:.005em;
 }
 .tide-line .g{transition:opacity .45s ease, letter-spacing .45s ease, color .45s ease}
+.tide-line .tw{border-radius:5px;padding:0 2px;transition:background .15s,color .15s}
+.tide-line .tw.now{background:var(--weak);color:#fff}
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.stg{font:inherit;cursor:pointer;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px 4px 7px;
+  display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink);transition:background .12s,border-color .12s}
+.stg .ic{font-size:15px;line-height:1}
+.stg b{font-size:13.5px;font-weight:700;white-space:nowrap}
+.stg small{font:600 11px/1 ui-monospace,Menlo,monospace;color:var(--ink-soft)}
+.stg:hover{border-color:var(--weak)}
+.stg.cur{border-color:var(--weak);background:rgba(46,139,132,.08)}
+.stg.playing{background:var(--weak);border-color:var(--weak);color:#fff}
+.stg.playing small{color:#fff}
+@media (max-width:420px){.stg b{font-size:12.5px}.stages{gap:4px}}
 .tide-line .g.gone{opacity:.12; letter-spacing:-.06em; color:var(--ink-soft)}
 .tide-ipa{
   font:15px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -518,8 +531,13 @@ footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);
       <span>逐字朗讀</span><span>慢速清楚</span><span>一般語速</span><span>快速自然</span>
     </div>
     <p class="tide-zh" id="tideZh"></p>
-    <div style="margin-top:10px" id="tideSay"></div>
-    <p class="zh" style="margin:6px 0 0">滑桿讓你<b>看見</b>哪些音被沖走；按 ①②③ <b>聽</b>真人語速的整句示範。</p>
+    <div class="stages" id="tideStages" role="group" aria-label="四階段語速">
+      <button class="stg" data-stage="0"><span class="ic">🐢</span><b>逐字朗讀</b><small>一字一停</small></button>
+      <button class="stg" data-stage="1"><span class="ic">🚶</span><b>慢速清楚</b><small>0.7×</small></button>
+      <button class="stg" data-stage="2"><span class="ic">🏃</span><b>一般語速</b><small>1.0×</small></button>
+      <button class="stg" data-stage="3"><span class="ic">🌊</span><b>快速自然</b><small>1.3×</small></button>
+    </div>
+    <p class="zh" style="margin:6px 0 0">按一個階段就會聽到那個速度，滑桿也會跟著移過去；拖滑桿放開時會自動播放。從逐字一路聽到快速，注意<b>淡掉的音</b>是怎麼被沖走的。</p>
     <div class="btnrow">
       <button class="btn sm" data-tide="prev">← 上一句</button>
       <button class="btn sm" data-tide="next">下一句 →</button>
@@ -870,7 +888,8 @@ var MODES={
 var CHEER=["Great effort! Keep going!","Every practice makes a difference!","Listen again, and give it another try!","Your voice, your progress!"];
 function cheer(){ return CHEER[Math.floor(Math.random()*CHEER.length)]; }
 
-var VOICE={v:null,cur:null,paused:false,wd:null,u:null,tried:false};
+var VOICE={v:null,cur:null,paused:false,wd:null,u:null,tried:false,seq:0};
+var VOICE_HOOKS=[];
 /* 同一個聲音身分：優先 Google US English，其次 Edge／Windows 自然語音，再來 Safari 的 Samantha，最後任何 en-US */
 function pickVoice(){
   if(!("speechSynthesis" in window)) return null;
@@ -912,11 +931,12 @@ function markPlaying(){
     bs[i].classList.toggle('paused',on && VOICE.paused);
   }
   VBAR.paint();
+  for(var h=0;h<VOICE_HOOKS.length;h++){ try{ VOICE_HOOKS[h](); }catch(e){} }
 }
 function stopVoice(){
   if(VOICE.wd){ clearInterval(VOICE.wd); VOICE.wd=null; }
   try{ speechSynthesis.cancel(); }catch(e){}
-  VOICE.cur=null; VOICE.paused=false; VOICE.u=null;
+  VOICE.cur=null; VOICE.paused=false; VOICE.u=null; VOICE.seq++;
   markPlaying();
 }
 function speak(text,mode,opt){
@@ -942,8 +962,8 @@ function speak(text,mode,opt){
   VOICE.tried=false;
   if(!v){ toast('這台裝置找不到美式英語語音。可在系統設定加裝英文（美國）語音後再試。',function(){ speak(text,mode); }); }
   var m=MODES[mode], u=new SpeechSynthesisUtterance(text);
-  u.lang='en-US'; if(v) u.voice=v; u.rate=m.rate; u.pitch=m.pitch; u.volume=1;
-  VOICE.u=u; VOICE.cur={text:text,mode:mode}; VOICE.paused=false;
+  u.lang='en-US'; if(v) u.voice=v; u.rate=(typeof opt.rate==='number'?opt.rate:m.rate); u.pitch=m.pitch; u.volume=1;
+  VOICE.u=u; VOICE.cur={text:text,mode:opt.tag||mode}; VOICE.paused=false;
   u.onend=function(){ if(VOICE.u===u){ VOICE.cur=null; VOICE.u=null; if(VOICE.wd){clearInterval(VOICE.wd);VOICE.wd=null;} markPlaying(); } };
   u.onerror=function(ev){
     if(VOICE.u!==u) return;
@@ -951,7 +971,7 @@ function speak(text,mode,opt){
     VOICE.cur=null; VOICE.u=null; markPlaying();
     if(er && er!=='interrupted' && er!=='canceled') toast('語音沒有播出來（'+er+'）。',function(){ speak(text,mode); });
   };
-  VBAR.show(text,!!opt.quiz);
+  if(!opt.noBar) VBAR.show(text,!!opt.quiz);
   try{ speechSynthesis.speak(u); }catch(e){ toast('語音沒有播出來。',function(){ speak(text,mode); }); return; }
   /* Chrome 長句會被切斷：定時 pause/resume（使用者暫停時不動） */
   VOICE.wd=setInterval(function(){
@@ -960,6 +980,28 @@ function speak(text,mode,opt){
     try{ speechSynthesis.pause(); speechSynthesis.resume(); }catch(e){}
   },9000);
   markPlaying();
+}
+/* 逐字朗讀：同一個聲音，一個字一個字唸，字與字之間停頓 */
+function speakSeq(full,words,rate,gap,onWord,tag){
+  if(MIC.isRec()){ toast('錄音中。先按「■ 停止錄音」，再聽示範。'); return; }
+  MIC.pausePlayback();
+  if(!("speechSynthesis" in window)){ toast('這個瀏覽器沒有語音朗讀功能。請改用 Chrome、Edge 或 Safari。'); return; }
+  stopVoice();
+  var v=VOICE.v||pickVoice(), tok=VOICE.seq, i=0;
+  VOICE.cur={text:full,mode:tag}; markPlaying();
+  function next(){
+    if(tok!==VOICE.seq) return;
+    if(i>=words.length){ VOICE.cur=null; VOICE.u=null; if(onWord) onWord(-1); markPlaying(); return; }
+    var u=new SpeechSynthesisUtterance(words[i]);
+    u.lang='en-US'; if(v) u.voice=v; u.rate=rate; u.pitch=1;
+    if(onWord) onWord(i);
+    VOICE.u=u;
+    u.onend=function(){ if(tok!==VOICE.seq) return; i++; setTimeout(next,gap); };
+    u.onerror=function(ev){ if(tok!==VOICE.seq) return; var er=ev&&ev.error;
+      if(er && er!=='interrupted' && er!=='canceled'){ VOICE.cur=null; markPlaying(); toast('語音沒有播出來（'+er+'）。',function(){ speakSeq(full,words,rate,gap,onWord,tag); }); } };
+    try{ speechSynthesis.speak(u); }catch(e){}
+  }
+  next();
 }
 /* 舊呼叫相容：一律以 ① 自然聆聽播放 */
 function say(text){ speak(text,'natural'); }
@@ -1170,11 +1212,46 @@ function renderTide(){
   tideIpa.textContent=L.ipa;
   tideZh.textContent=s.zh;
   tideCount.textContent=(tIdx+1)+" / "+TIDE.length;
-  document.getElementById('tideSay').innerHTML=say3(TIDE[tIdx].lv[1].say,false);
+  if(tLv===0){
+    var ws=L.t.replace(/~/g,'').split(' '), wh='';
+    for(i=0;i<ws.length;i++) wh+=(i?' ':'')+'<span class="tw" data-wi="'+i+'">'+ws[i].replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</span>';
+    tideLine.innerHTML=wh;
+  }
+  var stb=document.querySelectorAll('#tideStages .stg');
+  for(i=0;i<stb.length;i++) stb[i].classList.toggle('cur', i===tLv);
   var sp=tideTicks.children;
   for(i=0;i<sp.length;i++){ sp[i].classList.toggle('on', i===tLv); }
 }
-tideRange.addEventListener('input',function(){ tLv=parseInt(this.value,10)||0; renderTide(); });
+tideRange.addEventListener('input',function(){ tLv=parseInt(this.value,10)||0; stopVoice(); renderTide(); });
+tideRange.addEventListener('change',function(){ playStage(tLv); });
+/* 四階段：逐字（一字一停）、慢速 0.7×、一般 1.0×、快速 1.3× */
+var STAGE_RATE=[0.85,0.7,1.0,1.3];
+function stageText(lv){ var L=TIDE[tIdx].lv; return lv<=1 ? L[0].say : L[1].say; }
+function markStage(k){
+  var stb=document.querySelectorAll('#tideStages .stg');
+  for(var i=0;i<stb.length;i++) stb[i].classList.toggle('playing', i===k);
+}
+function playStage(k){
+  if(tLv!==k){ tLv=k; tideRange.value=k; renderTide(); }
+  if(VOICE.cur && VOICE.cur.mode==='stage'+k && VOICE.cur.text===stageText(k)){ stopVoice(); return; }
+  var txt=stageText(k);
+  if(k===0){
+    var words=txt.split(' ');
+    speakSeq(txt,words,STAGE_RATE[0],380,function(i){
+      var ws=tideLine.querySelectorAll('.tw');
+      for(var j=0;j<ws.length;j++) ws[j].classList.toggle('now', j===i);
+    },'stage0');
+  }else{
+    speak(txt,'natural',{rate:STAGE_RATE[k],tag:'stage'+k,noBar:true});
+  }
+}
+document.getElementById('tideStages').addEventListener('click',function(e){
+  var b=e.target.closest('.stg'); if(b) playStage(+b.getAttribute('data-stage'));
+});
+VOICE_HOOKS.push(function(){
+  markStage(VOICE.cur && /^stage\d$/.test(VOICE.cur.mode) ? +VOICE.cur.mode.slice(5) : -1);
+  if(!(VOICE.cur && VOICE.cur.mode==='stage0')){ var ws=tideLine.querySelectorAll('.tw.now'); for(var j=0;j<ws.length;j++) ws[j].classList.remove('now'); }
+});
 document.addEventListener('click',function(e){
   var b=e.target.closest?e.target.closest('[data-tide]'):null;
   if(!b) return;
