@@ -535,7 +535,7 @@ footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);
       <button class="stg" data-stage="0"><span class="ic">🐢</span><b>逐字朗讀</b><small>一字一停</small></button>
       <button class="stg" data-stage="1"><span class="ic">🚶</span><b>慢速清楚</b><small>0.7×</small></button>
       <button class="stg" data-stage="2"><span class="ic">🏃</span><b>一般語速</b><small>1.0×</small></button>
-      <button class="stg" data-stage="3"><span class="ic">🌊</span><b>快速自然</b><small>1.3×</small></button>
+      <button class="stg" data-stage="3"><span class="ic">🌊</span><b>快速自然</b><small>1.2×</small></button>
     </div>
     <p class="zh" style="margin:6px 0 0">按一個階段就會聽到那個速度，滑桿也會跟著移過去；拖滑桿放開時會自動播放。從逐字一路聽到快速，注意<b>淡掉的音</b>是怎麼被沖走的。</p>
     <div class="btnrow">
@@ -1227,8 +1227,8 @@ function renderTide(){
 }
 tideRange.addEventListener('input',function(){ tLv=parseInt(this.value,10)||0; stopVoice(); renderTide(); });
 tideRange.addEventListener('change',function(){ playStage(tLv); });
-/* 四階段：逐字（一字一停）、慢速 0.7×、一般 1.0×、快速 1.3× */
-var STAGE_RATE=[0.85,0.7,1.0,1.3];
+/* 四階段：逐字（一字一停）、慢速 0.7×、一般 1.0×、快速 1.2× */
+var STAGE_RATE=[0.85,0.7,1.0,1.2];
 function stageText(lv){ var L=TIDE[tIdx].lv; return lv<=1 ? L[0].say : L[1].say; }
 function markStage(k){
   var stb=document.querySelectorAll('#tideStages .stg');
