@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>退潮的聲音 — 英語弱化音互動學習單</title>
+<style>
+:root{
+  --paper:#EEF1EC;
+  --paper-2:#F7F9F5;
+  --ink:#16262B;
+  --ink-soft:#4A5F63;
+  --strong:#1F3A5F;   /* 強讀 */
+  --weak:#2E8B84;     /* 弱讀 */
+  --mark:#C8951C;     /* 標記 */
+  --line:#C9D2CB;
+  --shadow:0 1px 0 #fff, 0 2px 10px rgba(22,38,43,.07);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.75;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px 80px}
+
+/* ---------- header ---------- */
+header.top{
+  padding:38px 0 22px; border-bottom:2px solid var(--ink);
+  margin-bottom:0;
+}
+.eyebrow{
+  font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--weak);
+}
+h1.title{
+  font-family:"Iowan Old Style",Georgia,"Songti TC","Times New Roman",serif;
+  font-size:clamp(30px,6.2vw,50px); line-height:1.08; font-weight:700;
+  margin:12px 0 6px; letter-spacing:-.01em;
+}
+h1.title .sub{display:block;font-size:.44em;letter-spacing:.04em;color:var(--ink-soft);font-weight:400;margin-top:10px}
+.lede{max-width:52ch;color:var(--ink-soft);margin:14px 0 0;font-size:15px}
+
+/* ---------- tabs ---------- */
+nav.tabs{
+  position:sticky; top:0; z-index:20; background:var(--paper);
+  border-bottom:1px solid var(--line);
+  display:flex; gap:2px; overflow-x:auto; padding:8px 0 0;
+  scrollbar-width:none;
+}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{
+  flex:0 0 auto; background:none; border:0; cursor:pointer;
+  font:inherit; font-size:14px; font-weight:600; color:var(--ink-soft);
+  padding:10px 14px 12px; border-bottom:3px solid transparent; white-space:nowrap;
+  border-radius:6px 6px 0 0;
+}
+nav.tabs button .n{
+  font:700 11px/1 ui-monospace,Menlo,monospace; color:var(--line);
+  margin-right:6px; vertical-align:1px;
+}
+nav.tabs button:hover{color:var(--ink);background:rgba(46,139,132,.07)}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--weak)}
+nav.tabs button[aria-selected="true"] .n{color:var(--weak)}
+nav.tabs button:focus-visible,
+button:focus-visible,select:focus-visible,input:focus-visible{
+  outline:2px solid var(--mark); outline-offset:2px;
+}
+
+/* ---------- panels ---------- */
+.panel{display:none;padding-top:26px;animation:fade .28s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2.sec{
+  font-family:"Iowan Old Style",Georgia,"Songti TC",serif;
+  font-size:23px; margin:34px 0 4px; font-weight:700;
+}
+h2.sec:first-child{margin-top:0}
+.sec-note{color:var(--ink-soft);font-size:14px;margin:0 0 16px}
+.card{
+  background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius);
+  padding:18px; box-shadow:var(--shadow); margin:16px 0;
+}
+.rule{height:1px;background:var(--line);border:0;margin:34px 0}
+
+/* ---------- tide meter (signature) ---------- */
+.tide{
+  background:linear-gradient(180deg,#F7F9F5 0%, #E7EEEA 100%);
+  border:1px solid var(--line); border-radius:var(--radius); padding:20px 18px 22px;
+  box-shadow:var(--shadow);
+}
+.tide-line{
+  font-family:"Iowan Old Style",Georgia,serif;
+  font-size:clamp(20px,4.6vw,30px); line-height:1.5; margin:6px 0 4px;
+  min-height:2.2em; letter-spacing:.005em;
+}
+.tide-line .g{transition:opacity .45s ease, letter-spacing .45s ease, color .45s ease}
+.tide-line .g.gone{opacity:.12; letter-spacing:-.06em; color:var(--ink-soft)}
+.tide-ipa{
+  font:15px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--weak); margin:2px 0 0; word-break:break-word;
+}
+.tide-zh{color:var(--ink-soft);font-size:14px;margin:10px 0 0}
+.slider-row{display:flex;align-items:center;gap:12px;margin:20px 0 4px}
+input[type=range]{flex:1;accent-color:var(--weak);height:26px}
+.ticks{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+.ticks span{flex:1;text-align:center}
+.ticks span.on{color:var(--weak);font-weight:700}
+
+/* ---------- tables ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0 4px}
+.tbl th{
+  text-align:left;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:700;padding:0 10px 8px;border-bottom:1.5px solid var(--ink);
+}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.w-en{font-family:"Iowan Old Style",Georgia,serif;font-weight:700;font-size:17px;white-space:nowrap}
+.ipa{font:14px/1.5 ui-monospace,Menlo,monospace;white-space:nowrap}
+.ipa.s{color:var(--strong)}
+.ipa.w{color:var(--weak);font-weight:700}
+.arrow{color:var(--line);padding:0 2px}
+.zh{color:var(--ink-soft);font-size:13.5px}
+
+/* ---------- buttons ---------- */
+.btn{
+  font:inherit;font-size:14px;font-weight:600;cursor:pointer;
+  background:var(--paper-2);color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;padding:7px 15px;
+  transition:background .15s,border-color .15s,transform .08s;
+}
+.btn:hover{background:#fff;border-color:var(--weak)}
+.btn:active{transform:translateY(1px)}
+.btn.solid{background:var(--weak);color:#fff;border-color:var(--weak)}
+.btn.solid:hover{background:#26746E}
+.btn.ghost{background:none}
+.btn.sm{font-size:12.5px;padding:4px 11px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.rec{background:#B4432F;border-color:#B4432F;color:#fff}
+.btn.rec.live{animation:pulse 1.1s infinite}
+@keyframes pulse{50%{opacity:.55}}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 0}
+.spk{
+  border:0;background:none;cursor:pointer;font-size:17px;line-height:1;
+  padding:3px 5px;border-radius:8px;color:var(--weak);
+}
+.spk:hover{background:rgba(46,139,132,.13)}
+
+/* ---------- pair drill ---------- */
+.pairgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));margin-top:12px}
+.pair{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 13px;
+}
+.pair b{font-family:"Iowan Old Style",Georgia,serif;font-size:16px}
+.pair .row2{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px}
+.tag{
+  display:inline-block;font:700 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;
+  padding:4px 7px;border-radius:5px;text-transform:uppercase;
+}
+.tag.s{background:rgba(31,58,95,.1);color:var(--strong)}
+.tag.w{background:rgba(46,139,132,.14);color:var(--weak)}
+.tag.m{background:rgba(200,149,28,.16);color:#8A6510}
+
+/* ---------- quiz ---------- */
+.q{border-left:3px solid var(--line);padding:2px 0 2px 15px;margin:22px 0}
+.q .stem{font-weight:600;margin-bottom:9px}
+.q .stem .num{
+  font:700 12px/1 ui-monospace,Menlo,monospace;color:var(--weak);margin-right:8px;
+}
+.opts{display:grid;gap:7px}
+.opt{
+  text-align:left;font:inherit;font-size:14.5px;cursor:pointer;
+  background:var(--paper-2);border:1px solid var(--line);border-radius:10px;
+  padding:9px 13px;transition:background .12s,border-color .12s;
+}
+.opt:hover{border-color:var(--weak);background:#fff}
+.opt.right{background:rgba(46,139,132,.13);border-color:var(--weak);font-weight:600}
+.opt.wrong{background:rgba(180,67,47,.09);border-color:#B4432F}
+.opt.reveal{border-color:var(--weak);border-style:dashed}
+.fb{font-size:13.5px;color:var(--ink-soft);margin-top:8px;display:none}
+.fb.on{display:block}
+.score{
+  position:sticky;bottom:12px;background:var(--ink);color:#fff;border-radius:999px;
+  padding:9px 18px;font-size:14px;font-weight:600;display:inline-flex;gap:14px;align-items:center;
+  box-shadow:0 4px 18px rgba(22,38,43,.28);
+}
+.score b{font:700 16px/1 ui-monospace,Menlo,monospace;color:#8FD8D0}
+
+/* ---------- shadow / record ---------- */
+.shadow-item{border-bottom:1px solid var(--line);padding:15px 0}
+.shadow-item:last-child{border-bottom:0}
+.shadow-en{font-family:"Iowan Old Style",Georgia,serif;font-size:18px;font-weight:700}
+.shadow-red{color:var(--mark);font-family:"Iowan Old Style",Georgia,serif;font-size:16px;margin-top:2px}
+audio{width:100%;margin-top:10px;max-width:420px;display:block}
+
+/* ---------- log ---------- */
+.stat{display:flex;gap:26px;flex-wrap:wrap;margin:8px 0 4px}
+.stat div b{
+  display:block;font:700 30px/1.1 ui-monospace,Menlo,monospace;color:var(--weak);
+}
+.stat div span{font-size:12px;color:var(--ink-soft);letter-spacing:.08em}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+.dot{width:15px;height:15px;border-radius:4px;background:var(--line)}
+.dot.on{background:var(--weak)}
+.chk{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:14.5px;cursor:pointer}
+.chk input{margin-top:5px;accent-color:var(--weak);width:16px;height:16px;flex:0 0 auto}
+.chk.done span{color:var(--ink-soft);text-decoration:line-through}
+
+/* ---------- analysis & review ---------- */
+.bars{margin:14px 0 4px}
+.barrow{display:grid;grid-template-columns:minmax(120px,1.15fr) 3fr auto;gap:10px;align-items:center;padding:6px 0;font-size:13.5px}
+.barrow .lbl{color:var(--ink);font-weight:600}
+.bartrack{background:var(--line);border-radius:999px;height:12px;overflow:hidden}
+.barfill{height:100%;border-radius:999px;background:var(--weak);transition:width .5s ease}
+.barfill.warn{background:var(--mark)}
+.barfill.bad{background:#B4432F}
+.barnum{font:700 12.5px/1 ui-monospace,Menlo,monospace;color:var(--ink-soft);white-space:nowrap}
+.diag{border-left:3px solid var(--mark);padding:4px 0 4px 14px;margin:14px 0;font-size:14px}
+.diag b{display:block;margin-bottom:2px}
+.diag span{color:var(--ink-soft)}
+.pill{display:inline-block;font:700 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;
+  padding:4px 8px;border-radius:5px;background:rgba(46,139,132,.14);color:var(--weak);margin-right:6px}
+.pill.b1{background:rgba(180,67,47,.12);color:#B4432F}
+.pill.b2{background:rgba(200,149,28,.16);color:#8A6510}
+.pill.b3{background:rgba(46,139,132,.14);color:var(--weak)}
+.empty{text-align:center;color:var(--ink-soft);padding:34px 12px;font-size:14.5px}
+.empty b{display:block;font-family:"Iowan Old Style",Georgia,serif;font-size:19px;color:var(--ink);margin-bottom:6px}
+.wrongitem{border-bottom:1px solid var(--line);padding:12px 0;font-size:14px}
+.wrongitem:last-child{border-bottom:0}
+.wrongitem .qt{font-weight:600}
+/* ---------- 10 母音山谷 ---------- */
+.vv-hint{display:none;text-align:center;margin:0 0 4px}
+.vv-hint.on{display:block}
+.vv-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:18px;
+  background:#fff;box-shadow:var(--shadow)}
+.vv{position:relative;min-width:660px;height:420px;margin:0 6px}
+.vv-lines{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.vv-lines line{stroke:var(--weak);stroke-width:1.6;stroke-dasharray:5 5;opacity:0;transition:opacity .35s}
+.vv.show-red .vv-lines line{opacity:.8;animation:vvflow 1.4s linear infinite}
+@keyframes vvflow{to{stroke-dashoffset:-20}}
+.vc{position:absolute;width:calc(100% / 13);padding:0 3px;background:none;border:0;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;font:inherit;color:var(--ink);top:0}
+.vc-tile{width:100%;border:1.5px solid rgba(22,38,43,.28);border-radius:4px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;padding:7px 0;min-height:68px;transition:transform .12s,box-shadow .15s,border-color .15s}
+.vc:hover .vc-tile{transform:translateY(-3px);box-shadow:0 4px 10px rgba(22,38,43,.14)}
+.vc-tile img{width:80%;height:auto;display:block}
+.vc-tile .s{display:none;font:500 clamp(20px,2.6vw,30px)/1 "Iowan Old Style",Georgia,"Times New Roman",serif}
+.vc-tile .k{display:none;font:700 clamp(14px,1.8vw,19px)/1 ui-monospace,Menlo,monospace;color:var(--weak)}
+.vv[data-face="sym"] .vc-tile img,.vv[data-face="kk"] .vc-tile img{display:none}
+.vv[data-face="sym"] .vc-tile .s,.vv[data-face="kk"] .vc-tile .k{display:block}
+.vc-sp{margin-top:5px;position:relative;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 4px #fff;font:600 12.5px/1.3 system-ui,-apple-system,sans-serif;text-align:center;color:var(--ink);white-space:nowrap}
+.vc-sp span{display:block}
+.vc.schwa .vc-tile{border-style:dashed;border-color:var(--weak)}
+.vc.sel .vc-tile{border-color:var(--ink);border-width:2.5px}
+.vc.ok .vc-tile{border-color:var(--weak);border-width:3px;box-shadow:0 0 0 4px rgba(46,139,132,.25)}
+.vc.ng .vc-tile{border-color:#B4432F;border-width:3px;box-shadow:0 0 0 4px rgba(180,67,47,.2);animation:vshake .35s}
+.vc.hint .vc-tile{border-color:var(--weak);border-style:dashed;border-width:3px}
+.vv.gaming .vc.schwa{opacity:.3;pointer-events:none}
+.vv.hide-sp .vc-sp{visibility:hidden}
+.vv-side{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:14px}
+.vv-group h3{margin:0 0 6px;font-size:14px;font-weight:700}
+.vv-row{display:flex;gap:6px}
+.vv-row .vc{position:static;width:58px;padding:0}
+.vv-side.gaming .vc{opacity:.45;pointer-events:none}
+.tw-sp{display:block;font:800 18px/1.1 system-ui,sans-serif;color:var(--ink);margin-bottom:4px}
+.spell-q{font:800 34px/1 system-ui,-apple-system,sans-serif;letter-spacing:.02em}
+.spell-q small{display:block;font:500 15px/1.4 "Iowan Old Style",Georgia,serif;color:var(--ink-soft);margin-top:6px;letter-spacing:0}
+.spell-q small b{color:var(--ink);font-size:20px}
+.tile-mini{display:inline-flex;flex-direction:column;align-items:center;gap:1px;border:1px solid rgba(22,38,43,.25);
+  border-radius:3px;padding:3px;vertical-align:middle}
+.tile-mini img{width:30px;height:30px}
+.confuse .tile-mini img{width:28px;height:28px}
+.confuse .x .tile-mini img{width:20px;height:20px}
+.bchoice{display:flex;flex-direction:column;align-items:center;gap:2px}
+.bchoice img{width:72%}
+
+.vv-side[data-face="sym"] .vc-tile img,.vv-side[data-face="kk"] .vc-tile img{display:none}
+.vv-side[data-face="sym"] .vc-tile .s,.vv-side[data-face="kk"] .vc-tile .k{display:block}
+
+/* ---------- 10 母音地圖（舊版共用樣式） ---------- */
+.vm-wrap{display:grid;grid-template-columns:26px 1fr;gap:6px;margin-top:6px}
+.vm-yaxis{writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;justify-content:center;
+  font-size:12px;color:var(--ink-soft);letter-spacing:.12em;gap:6px;white-space:nowrap}
+.vm-yaxis b{color:var(--ink);font-weight:700}
+.vmap{
+  position:relative;width:100%;aspect-ratio:1/1.05;
+  background:linear-gradient(180deg,#E6E9F6 0%,#EEF1EC 100%);
+  border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;
+}
+.vmap svg.vm-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.vm-lines line{stroke:var(--weak);stroke-width:.45;stroke-dasharray:1.6 1.4;opacity:0;transition:opacity .35s}
+.vmap.show-red .vm-lines line{opacity:.85;animation:vmflow 1.6s linear infinite}
+@keyframes vmflow{to{stroke-dashoffset:-6}}
+.vb{
+  position:absolute;transform:translate(-50%,-50%);
+  width:clamp(52px,17%,88px);aspect-ratio:1;border-radius:50%;
+  background:#F4F4F6;border:1.5px solid #D6D7DE;box-shadow:0 2px 6px rgba(22,38,43,.10);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  cursor:pointer;font:inherit;color:var(--ink);padding:0;transition:transform .12s,border-color .15s,background .15s;
+}
+.vb:hover{transform:translate(-50%,-50%) scale(1.06);border-color:var(--weak)}
+.vb img{width:60%;height:auto;display:block;pointer-events:none}
+.vb .lb{font:800 clamp(11px,3vw,15px)/1 system-ui,-apple-system,sans-serif;letter-spacing:.02em}
+.vb .kk{font:600 clamp(10px,2.6vw,13px)/1 ui-monospace,Menlo,monospace;color:var(--weak)}
+.vmap[data-face="block"] .vb .kk,.vmap[data-face="kk"] .vb img,.vmap[data-face="kk"] .vb .lb,
+.vmap[data-face="label"] .vb img,.vmap[data-face="label"] .vb .kk{display:none}
+.vmap[data-face="kk"] .vb .kk{font-size:clamp(15px,4.4vw,22px)}
+.vmap[data-face="label"] .vb .lb{font-size:clamp(14px,4vw,20px)}
+.vb.schwa{background:rgba(46,139,132,.10);border:1.5px dashed var(--weak);width:clamp(46px,14%,74px)}
+.vb.sel{border-color:var(--ink);border-width:2.5px;background:#fff}
+.vb.ok{background:#CDEDE8;border-color:var(--weak);animation:vpop .35s}
+.vb.ng{background:#F6D3CC;border-color:#B4432F;animation:vshake .35s}
+.vb.hint{border-color:var(--weak);border-style:dashed;border-width:2.5px}
+@keyframes vpop{50%{transform:translate(-50%,-50%) scale(1.15)}}
+@keyframes vshake{25%{transform:translate(-56%,-50%)}75%{transform:translate(-44%,-50%)}}
+.vmap.gaming .vb.schwa{opacity:.35;pointer-events:none}
+.vm-xaxis{text-align:center;font-size:12px;color:var(--ink-soft);letter-spacing:.12em;margin:8px 0 0 32px}
+.vm-xaxis b{color:var(--ink)}
+.seg{display:inline-flex;background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.seg button{font:inherit;font-size:12.5px;font-weight:600;border:0;background:none;color:var(--ink-soft);
+  padding:5px 11px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.vdetail{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start}
+.vdetail img{width:96px;height:96px}
+.vdetail h3{margin:0;font-family:"Iowan Old Style",Georgia,serif;font-size:22px}
+.vdetail h3 small{font:600 14px ui-monospace,Menlo,monospace;color:var(--weak);margin-left:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font:inherit;font-size:14px;cursor:pointer;background:#fff;border:1px solid var(--line);
+  border-radius:8px;padding:4px 10px;font-family:"Iowan Old Style",Georgia,serif}
+.chip:hover{border-color:var(--weak)}
+.chip.dup{font-family:inherit;font-size:12px;color:var(--ink-soft);background:none;cursor:default}
+.dtgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-top:10px}
+.dt{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;cursor:pointer}
+.dt:hover{border-color:var(--weak)}
+.dt .imgs{display:flex;justify-content:center;gap:2px}
+.dt img{width:48px;height:48px}
+.dt b{display:block;font:700 14px ui-monospace,Menlo,monospace;color:var(--weak);margin-top:2px}
+.dt span{font-size:13px;color:var(--ink-soft)}
+.game-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.game-count{font:700 26px/1 ui-monospace,Menlo,monospace}
+.game-prompt{display:flex;align-items:center;gap:12px;margin:12px 0;min-height:64px}
+.game-prompt img{width:64px;height:64px}
+.bigplay{width:56px;height:56px;border-radius:50%;border:0;background:var(--weak);color:#fff;font-size:22px;cursor:pointer;flex:0 0 auto}
+.bigplay:hover{background:#26746E}
+.gdots{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0 0}
+.gdots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.gdots i.ok{background:var(--weak)}.gdots i.ng{background:#B4432F}.gdots i.cur{background:var(--ink)}
+.bchoices{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.bchoice{background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px;cursor:pointer}
+.bchoice img{width:100%;height:auto;display:block}
+.bchoice.ok{border-color:var(--weak);background:#CDEDE8}.bchoice.ng{border-color:#B4432F;background:#F6D3CC}
+.bchoice.hint{border-color:var(--weak);border-style:dashed}
+.confuse{display:grid;grid-template-columns:40px 1fr auto;column-gap:10px;row-gap:2px;align-items:center;
+  padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.confuse:last-child{border-bottom:0}
+.confuse>img{width:40px;height:40px;grid-row:1/3}
+.confuse .x{grid-column:2/4;display:flex;align-items:center;gap:6px;color:var(--ink-soft);font-size:13px}
+.confuse .x b{color:#B4432F}
+.confuse .x img{width:26px;height:26px}
+@media (max-width:420px){.vdetail{grid-template-columns:72px 1fr}.vdetail img{width:72px;height:72px}}
+
+.note{
+  background:rgba(200,149,28,.09);border:1px solid rgba(200,149,28,.35);
+  border-radius:12px;padding:13px 15px;font-size:14px;margin:16px 0;
+}
+.note b{color:#8A6510}
+/* ---------- layout refinements ---------- */
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 4px}
+.tblwrap .tbl{margin:0;min-width:480px}
+.tbl tbody tr:nth-child(even) td{background:rgba(46,139,132,.035)}
+.tbl tbody tr:hover td{background:rgba(46,139,132,.08)}
+nav.tabs{
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 34px),transparent);
+  mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 34px),transparent);
+}
+.wave{display:block;width:100%;height:22px;margin:18px 0 -6px}
+.wave .crest{stroke:var(--ink);stroke-width:2.4;fill:none}
+.wave .tidep{stroke:var(--weak);stroke-width:1.6;fill:none;stroke-dasharray:5 6;opacity:.75;
+  animation:drift 14s linear infinite}
+@keyframes drift{to{stroke-dashoffset:-110}}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--ink-soft);margin:14px 0 0}
+.flow b{background:var(--paper-2);border:1px solid var(--line);border-radius:7px;padding:3px 9px;font-weight:600;color:var(--ink);white-space:nowrap}
+.flow i{font-style:normal;color:var(--line)}
+.pnav{display:flex;justify-content:space-between;gap:10px;margin-top:44px;padding-top:16px;border-top:1px solid var(--line)}
+.pnav button{
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink);
+  background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;
+  max-width:48%;text-align:left;transition:border-color .15s,background .15s;
+}
+.pnav button:hover{border-color:var(--weak);background:#fff}
+.pnav button .k{display:block;font:700 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.14em;color:var(--weak);margin-bottom:3px}
+.pnav button.next{text-align:right;margin-left:auto}
+.qprog{font-size:12.5px;color:var(--ink-soft)}
+@media print{
+  nav.tabs,.btnrow,.spk,.pnav,.score,audio,input[type=range]{display:none!important}
+  .panel{display:block!important;page-break-before:always;padding-top:0}
+  .panel:first-of-type{page-break-before:auto}
+  body{background:#fff;font-size:12px}
+  .card,.tide{box-shadow:none;break-inside:avoid}
+  .tbl td,.tbl th{padding:4px 6px}
+}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+@media (max-width:520px){
+  .tbl td,.tbl th{padding-left:6px;padding-right:6px}
+  .zh{display:block}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">SoR 美語 · 聽力解碼</div>
+  <h1 class="title">退潮的聲音
+    <span class="sub">英語口語弱化 — Reduction &amp; Weak Forms</span>
+  </h1>
+  <p class="lede">英語不是每個字都念滿的。潮水退去時，露出的是重讀的骨架；被淹沒的，是那些不必聽清楚也懂的音。聽不懂快速英語，多半不是單字不夠，而是沒學過「被沖走的部分長什麼樣」。</p>
+  <svg class="wave" viewBox="0 0 600 24" preserveAspectRatio="none" aria-hidden="true">
+    <path class="tidep" d="M0 14 Q 20 20 40 14 T 80 14 T 120 14 T 160 14 T 200 14 T 240 14 T 280 14 T 320 14 T 360 14 T 400 14 T 440 14 T 480 14 T 520 14 T 560 14 T 600 14"/>
+    <path class="crest" d="M0 16 L60 16 Q75 4 90 16 L200 16 Q215 4 230 16 L300 16 Q315 4 330 16 L460 16 Q475 4 490 16 L600 16"/>
+  </svg>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="單元">
+  <button role="tab" data-go="p1" aria-selected="true"><span class="n">01</span>潮汐尺</button>
+  <button role="tab" data-go="p2" aria-selected="false"><span class="n">02</span>母音退位</button>
+  <button role="tab" data-go="p3" aria-selected="false"><span class="n">03</span>功能詞</button>
+  <button role="tab" data-go="p4" aria-selected="false"><span class="n">04</span>子音變形</button>
+  <button role="tab" data-go="p5" aria-selected="false"><span class="n">05</span>吞音與縮合</button>
+  <button role="tab" data-go="p6" aria-selected="false"><span class="n">06</span>聽辨測驗</button>
+  <button role="tab" data-go="p7" aria-selected="false"><span class="n">07</span>跟讀錄音</button>
+  <button role="tab" data-go="p8" aria-selected="false"><span class="n">08</span>學習紀錄</button>
+  <button role="tab" data-go="p9" aria-selected="false"><span class="n">09</span>錯題複習</button>
+  <button role="tab" data-go="p10" aria-selected="false"><span class="n">10</span>母音山谷</button>
+</nav>
+
+<!-- ============ 01 ============ -->
+<section class="panel on" id="p1" role="tabpanel">
+  <h2 class="sec">把語速拉一拉，看聲音怎麼退潮</h2>
+  <p class="sec-note">同一句話，四種語速。拖動滑桿，淡掉的字母就是快速口語中真正被沖走的部分。</p>
+
+  <div class="tide">
+    <div class="tide-line" id="tideLine"></div>
+    <p class="tide-ipa" id="tideIpa"></p>
+    <div class="slider-row">
+      <input type="range" id="tideRange" min="0" max="3" value="0" step="1" aria-label="語速">
+      <button class="spk" id="tideSpk" title="朗讀">🔊</button>
+    </div>
+    <div class="ticks" id="tideTicks">
+      <span>逐字朗讀</span><span>慢速清楚</span><span>一般語速</span><span>快速自然</span>
+    </div>
+    <p class="tide-zh" id="tideZh"></p>
+    <div class="btnrow">
+      <button class="btn sm" data-tide="prev">← 上一句</button>
+      <button class="btn sm" data-tide="next">下一句 →</button>
+      <span class="zh" id="tideCount"></span>
+    </div>
+  </div>
+
+  <div class="flow" aria-label="建議動線">
+    建議動線　<b>10 母音山谷 打底</b><i>→</i><b>01 感受</b><i>→</i><b>02–05 規則</b><i>→</i><b>06 測驗</b><i>→</i><b>09 錯題</b><i>→</i><b>07 跟讀</b><i>→</i><b>08 打卡</b>
+  </div>
+
+  <div class="note">
+    <b>一句話原理：</b>英語是重音計時語言（stress-timed）。重音之間的時間大致相等，所以夾在重音之間的音節必須被壓縮 — 母音退成 /ə/、子音被吞掉。<b>弱化不是懶惰，是節奏的必然結果。</b>
+  </div>
+
+  <h2 class="sec">弱化的三個層次</h2>
+  <div class="pairgrid">
+    <div class="pair">
+      <span class="tag w">層次一</span>
+      <div class="row2"><b>母音退位</b></div>
+      <p class="zh" style="margin:4px 0 0">非重讀音節的母音塌陷成 /ə/ 或 /ɪ/。<br>can /kæn/ → /kən/</p>
+    </div>
+    <div class="pair">
+      <span class="tag w">層次二</span>
+      <div class="row2"><b>子音變形</b></div>
+      <p class="zh" style="margin:4px 0 0">/t/ 變閃音、/h/ 脫落、尾子音失去爆破。<br>water → /ˈwɑɾɚ/</p>
+    </div>
+    <div class="pair">
+      <span class="tag w">層次三</span>
+      <div class="row2"><b>整段消失</b></div>
+      <p class="zh" style="margin:4px 0 0">音節省略、兩字合併成一個詞。<br>going to → gonna</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="panel" id="p2" role="tabpanel">
+  <h2 class="sec">母音退位：一切都塌向 /ə/</h2>
+  <p class="sec-note">schwa /ə/ 是英語裡最常出現的母音，卻沒有任何一個字母固定代表它。舌頭放在最放鬆的中央位置，嘴不動、不用力，短短一聲。</p>
+
+  <div class="card">
+    <p style="margin:0 0 6px"><b>先用身體記住它</b></p>
+    <p class="zh" style="margin:0">嘴唇微開約一指寬，舌頭平放不抬起，喉嚨輕輕出聲，像被戳了一下發出的「ㄜ」。<b>關鍵：不要用力，一用力它就變成別的母音了。</b></p>
+    <div class="btnrow">
+      <button class="btn sm" data-say="uh uh uh">聽 /ə/</button>
+      <button class="btn sm" data-say="banana, about, sofa, again, problem">聽字例</button>
+    </div>
+  </div>
+
+  <p class="zh" style="margin:0 0 6px">想看 /ə/ 在母音山谷的位置、各母音怎麼往中間退？ <button class="btn sm" data-go="p10">到 10 母音山谷 →</button></p>
+
+  <h2 class="sec">同一個字，重讀 vs 弱讀</h2>
+  <p class="sec-note">左邊是字典裡的樣子（強讀式），右邊是句子裡真正的樣子（弱讀式）。</p>
+  <table class="tbl" id="tblVowel"></table>
+
+  <div class="note">
+    <b>常見誤解：</b>學生常以為弱讀是「念錯」或「不標準」。恰恰相反 — 母語者在自然語速下<b>必須</b>弱讀，句句飽滿反而聽起來像機器人，也會讓聽者抓不到句子重點在哪。
+  </div>
+
+  <h2 class="sec">你問的 in，會弱化嗎？</h2>
+  <div class="card">
+    <p style="margin:0 0 8px">會，但幅度小。<b>in</b> 本身只有一個短母音，沒什麼可壓縮的空間，所以它的弱化主要表現在兩件事上：</p>
+    <table class="tbl">
+      <tr><td style="width:34%"><span class="tag w">母音塌陷</span></td>
+          <td><span class="ipa s">/ɪn/</span> <span class="arrow">→</span> <span class="ipa w">/ən/</span><br><span class="zh">I'll be in the car. · Come in the morning.</span></td>
+          <td style="width:40px"><button class="spk" data-say="I'll be in the car">🔊</button></td></tr>
+      <tr><td><span class="tag w">併入前後字</span></td>
+          <td>in a <span class="arrow">→</span> <span class="ipa w">/ɪnə/</span>「ina」<br>put it in <span class="arrow">→</span> <span class="ipa w">/pʊɾɪɾn̩/</span>「put i-t'n」<br><span class="zh">in and out → in'n'out</span></td>
+          <td><button class="spk" data-say="I'll be back in a minute">🔊</button></td></tr>
+      <tr><td><span class="tag m">不弱化</span></td>
+          <td>當它是<b>副詞、在句尾、或用來對比</b>時要重讀：<br><span class="zh">Come IN. · Hand it IN. · Go IN, not out.</span></td>
+          <td><button class="spk" data-say="Go in, not out">🔊</button></td></tr>
+    </table>
+    <p class="zh" style="margin:10px 0 0">辨識口訣：<b>介系詞 in 會退潮，副詞 in 站在岸上。</b></p>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="panel" id="p3" role="tabpanel">
+  <h2 class="sec">功能詞：最常聽不懂的那些小字</h2>
+  <p class="sec-note">內容詞（名詞、動詞、形容詞、疑問詞）承載訊息，一定重讀；功能詞（介系詞、代名詞、助動詞、冠詞、連接詞）只負責文法，幾乎都弱讀。<b>聽力破口通常不在生字，而在這些你「早就會」的字。</b></p>
+
+  <div class="btnrow" style="margin-bottom:6px">
+    <button class="btn sm" data-filter="all">全部</button>
+    <button class="btn sm" data-filter="aux">助動詞</button>
+    <button class="btn sm" data-filter="prep">介系詞</button>
+    <button class="btn sm" data-filter="pron">代名詞</button>
+    <button class="btn sm" data-filter="conj">連接冠詞</button>
+  </div>
+  <table class="tbl" id="tblFunc"></table>
+
+  <div class="note">
+    <b>弱讀的三個例外</b> — 功能詞遇到以下情況要回到強讀式：
+    ① <b>句尾</b>：Yes, they <b>are</b>. /ɑr/ · What are you looking <b>at</b>? /æt/　
+    ② <b>對比強調</b>：coffee <b>and</b> tea, not or　
+    ③ <b>單獨出現／被追問</b>：“For?” — “<b>For</b> you.”
+    <span class="zh">口訣：弱讀靠隊伍，落單就站直。</span>
+  </div>
+
+  <hr class="rule">
+  <h2 class="sec">代名詞的 /h/ 脫落</h2>
+  <p class="sec-note">he / him / her / his 在句中不重讀時，開頭的 /h/ 常整個掉光，於是黏到前一個字上。這是初學者聽力最大的陷阱之一。</p>
+  <table class="tbl" id="tblH"></table>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="panel" id="p4" role="tabpanel">
+  <h2 class="sec">子音變形</h2>
+  <p class="sec-note">母音退位之後，輪到子音。以下四種變化涵蓋美式口語裡九成的「聽起來不像那個字」。</p>
+
+  <h2 class="sec">① 閃音 T — 最像「ㄌ」的 /t/</h2>
+  <div class="card">
+    <p style="margin:0 0 4px">條件：<b>/t/ 或 /d/ 夾在兩個母音之間，而且後面那個音節不重讀。</b>舌尖快速輕拍上齒齦一下，像中文「ㄌ」或彈舌。</p>
+    <table class="tbl" id="tblFlap"></table>
+    <p class="zh" style="margin:8px 0 0">跨字也適用：get it → 「ge-di」、a lot of → 「a lo-da」、shut up → 「shu-dup」。</p>
+  </div>
+
+  <h2 class="sec">② 停頓 T — 吞回去的 /t/</h2>
+  <div class="card">
+    <p style="margin:0 0 4px">條件：<b>/t/ 在字尾，或後面接 /n/。</b>舌尖到位、氣流卡住，但不放開 — 只留下一個停頓感。</p>
+    <table class="tbl" id="tblStopT"></table>
+  </div>
+
+  <h2 class="sec">③ 顎化 — 兩個音撞出新音</h2>
+  <div class="card">
+    <p style="margin:0 0 4px">/t d s z/ 遇上 /j/（you, your），會融合成 /tʃ dʒ ʃ ʒ/。</p>
+    <table class="tbl" id="tblPal"></table>
+  </div>
+
+  <h2 class="sec">④ 子音串簡化</h2>
+  <div class="card">
+    <p style="margin:0 0 4px">三個子音擠在一起時，中間的 /t/ /d/ 通常犧牲。</p>
+    <table class="tbl" id="tblClus"></table>
+  </div>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="panel" id="p5" role="tabpanel">
+  <h2 class="sec">音節省略 — 整段被吃掉</h2>
+  <p class="sec-note">多音節字裡，重音之後的弱音節常常整個消失。這些不是俚語，是受過教育的母語者日常的標準念法。</p>
+  <table class="tbl" id="tblElide"></table>
+
+  <hr class="rule">
+  <h2 class="sec">縮合 — 兩個字長成一個</h2>
+  <p class="sec-note">寫出來像俚語，聽起來卻是常態。<b>學會辨認（聽），不一定要主動使用（說）</b> — 正式場合仍以完整形式為宜。</p>
+  <table class="tbl" id="tblContr"></table>
+
+  <div class="note">
+    <b>教學提醒：</b>gonna / wanna 這類形式在<b>寫作中不可使用</b>，正式簡報與考試口說也應避免。但若聽力訓練時只練完整形式，學生到了真實語境會全盤失守。建議課堂上明確區分兩張表：<b>聽得懂的清單</b>（全部）與<b>說得出的清單</b>（依場合）。
+  </div>
+</section>
+
+<!-- ============ 06 ============ -->
+<section class="panel" id="p6" role="tabpanel">
+  <h2 class="sec">聽辨測驗</h2>
+  <p class="sec-note">選出對應的完整句子或正確說法。作答後會顯示解析，可按 🔊 聽完整句。</p>
+  <div id="quizBox"></div>
+  <div class="btnrow" style="margin-top:26px">
+    <span class="score">答對 <b id="qScore">0</b> / <span id="qTotal">0</span></span>
+    <span class="qprog" id="qProg"></span>
+    <button class="btn ghost sm" id="qReset">重做</button>
+    <button class="btn ghost sm" data-go="p9">前往錯題複習 →</button>
+  </div>
+
+  <div id="qAnalysis"></div>
+</section>
+
+<!-- ============ 09 ============ -->
+<section class="panel" id="p9" role="tabpanel">
+  <h2 class="sec">錯題複習</h2>
+  <p class="sec-note">答錯的題目會自動進入錯題本，依 Leitner 三盒制排程：<b>盒 1 今天再練、盒 2 隔一天、盒 3 隔三天</b>。連續答對三次就結業移出。答錯則退回盒 1。</p>
+
+  <div class="card">
+    <div class="stat">
+      <div><b id="rvDue">0</b><span>今天待複習</span></div>
+      <div><b id="rvOpen">0</b><span>錯題本題數</span></div>
+      <div><b id="rvGrad">0</b><span>已結業</span></div>
+    </div>
+    <div class="btnrow">
+      <button class="btn solid" id="rvStart">開始複習</button>
+      <button class="btn ghost sm" id="rvAll">不管排程，全部練一次</button>
+      <button class="btn ghost sm" id="rvClear">清空錯題本</button>
+    </div>
+  </div>
+
+  <div id="rvArea"></div>
+
+  <h2 class="sec">錯題本清單</h2>
+  <div class="card" id="rvList"></div>
+</section>
+
+<!-- ============ 07 ============ -->
+<section class="panel" id="p7" role="tabpanel">
+  <h2 class="sec">跟讀與錄音</h2>
+  <p class="sec-note">流程：<b>聽 → 跟讀 → 錄下自己 → 比對</b>。重點不是念得快，是把該弱的地方真的弱下來 — 弱讀念得夠輕，重讀才會自然浮出來。</p>
+
+  <div class="note" style="margin-top:0">
+    <b>錄音只留在這個頁面上</b>，不會上傳到任何地方；關閉分頁後就消失。需要保留請按「下載」。
+  </div>
+
+  <div class="card" id="shadowBox"></div>
+
+  <h2 class="sec">自我檢核</h2>
+  <div class="card" id="rubricBox"></div>
+</section>
+
+<!-- ============ 08 ============ -->
+<section class="panel" id="p8" role="tabpanel">
+  <h2 class="sec">學習紀錄</h2>
+  <p class="sec-note">紀錄存在這台裝置的瀏覽器裡。</p>
+  <div class="card">
+    <div class="stat">
+      <div><b id="stDays">0</b><span>累積練習天數</span></div>
+      <div><b id="stStreak">0</b><span>連續天數</span></div>
+      <div><b id="stBest">—</b><span>測驗最佳成績</span></div>
+      <div><b id="stWrong">0</b><span>錯題本待複習</span></div>
+    </div>
+    <div class="dots" id="dots" aria-label="最近三十天"></div>
+    <div class="btnrow">
+      <button class="btn solid" id="btnCheck">今天練過了</button>
+      <button class="btn ghost sm" id="btnClear">清除紀錄</button>
+    </div>
+    <p class="zh" id="checkMsg" style="margin:10px 0 0"></p>
+  </div>
+
+  <h2 class="sec">帶走的三句話</h2>
+  <div class="card">
+    <ol style="margin:0;padding-left:20px">
+      <li>弱化發生在<b>非重讀位置</b>，功能詞是主要對象。</li>
+      <li>母音先塌向 /ə/，接著子音變形、脫落，最後整段消失。</li>
+      <li>聽不懂快速英語，通常不是生字問題，是<b>沒把弱化形式建成聽覺檔案</b>。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 10 母音山谷 ============ -->
+<section class="panel" id="p10" role="tabpanel">
+  <h2 class="sec">母音山谷 Vowel Valley × SoR 專利注音積木</h2>
+  <p class="sec-note">13 個母音從左邊的 ē 一路往下走到谷底的 ŏ，再爬上右邊的 yū。<b>左坡是嘴角往兩側拉的音，右坡是嘴唇往前收圓的音</b>，谷底嘴巴張最大。每格下面是這個音常見的拼法。點任一格看積木、聽字例；山谷正上方虛線那格是 schwa /ə/，弱讀的母音都會往它退。</p>
+
+  <div class="btnrow" style="margin:0 0 10px">
+    <span class="seg" role="group" aria-label="格子顯示方式">
+      <button data-face="block" aria-pressed="true">積木</button>
+      <button data-face="sym" aria-pressed="false">長短音符號</button>
+      <button data-face="kk" aria-pressed="false">KK</button>
+    </span>
+    <button class="btn sm" id="vvRed">顯示弱化方向</button>
+  </div>
+
+  <p class="zh vv-hint" id="vvHint">← 左右滑動看整座山谷 →</p>
+  <div class="vv-scroll" id="vvScroll">
+    <div class="vv" id="vv" data-face="block">
+      <svg class="vv-lines" id="vvLines" aria-hidden="true"></svg>
+    </div>
+  </div>
+
+  <div class="vv-side">
+    <div class="vv-group">
+      <h3>雙母音 Diphthongs</h3>
+      <div class="vv-row" id="vvDiph"></div>
+    </div>
+    <div class="vv-group">
+      <h3>捲舌母音 R-Controlled</h3>
+      <div class="vv-row" id="vvR"></div>
+    </div>
+  </div>
+
+  <div class="card" id="vmDetail" style="margin-top:14px"></div>
+
+  <div class="note">
+    <b>和弱化的關係：</b>按「顯示弱化方向」，山谷裡每一格都會拉一條線到上方的 ə（積木 44 ㄜ）。非重讀時舌頭懶得走到山坡上，就停在中間 — can /kæn/ 從 ă（49）退成 ə（44）。<b>離 ə 越遠的格子，弱讀時變得越多，聽起來差越多。</b>
+  </div>
+
+  <hr class="rule">
+  <h2 class="sec">母音練習</h2>
+  <p class="sec-note">每回 10 題，題目從山谷 13 格裡抽。答錯的「易混對」會列在結果裡。</p>
+  <div class="btnrow" style="margin:0 0 4px">
+    <button class="btn solid" data-vgame="map">① 聽音找格子</button>
+    <button class="btn" data-vgame="block">② 聽字選積木</button>
+    <button class="btn" data-vgame="see">③ 看積木找格子</button>
+    <button class="btn" data-vgame="spell">④ 拼法歸位</button>
+  </div>
+  <p class="zh" id="vgBest" style="margin:6px 0 0"></p>
+  <div class="card" id="vGame" style="display:none"></div>
+
+  <h2 class="sec">同一個拼法，不同的音</h2>
+  <p class="sec-note">山谷裡有些拼法出現在兩格。光看字母猜不出來，要靠整個字。點一下聽兩個字。</p>
+  <div class="dtgrid" id="vvTwin"></div>
+
+  <h2 class="sec">最小對比：只差一個母音</h2>
+  <p class="sec-note">積木不同，嘴型和舌位就不同 — 這是台灣學生最常混在一起的幾組。</p>
+  <div class="dtgrid" id="vmPairs"></div>
+
+  <h2 class="sec">44 SOUNDS 母音 01–20</h2>
+  <p class="sec-note">依《44 SOUNDS · KK 音標＋奇蹟木專利音標＋英文單字》的母音區排列，例字照原表。點卡片聽字例。<br>
+  講義為了排版把兩個音疊成一格，實際排積木是<b>兩塊並排</b>：/ju/、/ɔɪ/ 和四個 r 前的母音都是這樣。山谷裡的格子把兩塊上下疊放，由上往下讀，等於由左往右排。</p>
+  <div class="btnrow" style="margin:0 0 4px">
+    <span class="seg" role="group" aria-label="篩選">
+      <button data-vf="all" aria-pressed="true">全部 20</button>
+      <button data-vf="mono" aria-pressed="false">單母音</button>
+      <button data-vf="glide" aria-pressed="false">雙母音</button>
+      <button data-vf="r" aria-pressed="false">捲舌母音</button>
+    </span>
+  </div>
+  <div class="dtgrid" id="vmDiph"></div>
+
+  <p class="zh" style="margin-top:18px">山谷版型參考 ms.bilingual23〈Vowel Valley〉。積木依《44 SOUNDS》與《臺灣雙語注音符號表 KK 對照版》：ŏ 與 aw 同為 46（ㄚ♥），ŭ 與 ə 同為 44（ㄜ）。「看積木找格子」看到共用的積木，點兩格中任一格都算對。</p>
+</section>
+
+<footer>
+  <span>退潮的聲音 · 英語弱化音互動學習單</span>
+  <span id="stamp"></span>
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------- storage ---------------- */
+var mem = {};
+var LS = (function(){
+  try{ var k="__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k);
+    return { get:function(k){ try{return localStorage.getItem(k);}catch(e){return mem[k]||null;} },
+             set:function(k,v){ try{localStorage.setItem(k,v);}catch(e){mem[k]=v;} },
+             del:function(k){ try{localStorage.removeItem(k);}catch(e){delete mem[k];} } };
+  }catch(e){
+    return { get:function(k){return mem[k]||null;}, set:function(k,v){mem[k]=v;}, del:function(k){delete mem[k];} };
+  }
+})();
+
+/* ---------------- TTS (with Chrome GC watchdog) ---------------- */
+var _utter=null,_wd=null;
+function say(text,rate){
+  if(!("speechSynthesis" in window)) return;
+  try{ speechSynthesis.cancel(); }catch(e){}
+  if(_wd){clearInterval(_wd);_wd=null;}
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=(typeof rate==="number"?rate:0.9); u.pitch=1;
+  var vs=speechSynthesis.getVoices()||[];
+  for(var i=0;i<vs.length;i++){ if(/en[-_]US/i.test(vs[i].lang)){u.voice=vs[i];break;} }
+  _utter=u;
+  u.onend=u.onerror=function(){ if(_wd){clearInterval(_wd);_wd=null;} _utter=null; };
+  speechSynthesis.speak(u);
+  _wd=setInterval(function(){
+    if(!speechSynthesis.speaking){ clearInterval(_wd); _wd=null; return; }
+    try{ speechSynthesis.pause(); speechSynthesis.resume(); }catch(e){}
+  },9000);
+}
+if("speechSynthesis" in window){ try{ speechSynthesis.getVoices(); }catch(e){} }
+
+/* ---------------- tabs ---------------- */
+var tabBtns=document.querySelectorAll('nav.tabs button[data-go]');
+function goTab(id){
+  var i,p=document.querySelectorAll('.panel');
+  for(i=0;i<p.length;i++){ p[i].classList.toggle('on', p[i].id===id); }
+  for(i=0;i<tabBtns.length;i++){ tabBtns[i].setAttribute('aria-selected', tabBtns[i].getAttribute('data-go')===id?'true':'false'); }
+  window.scrollTo({top:0,behavior:'smooth'});
+  try{ speechSynthesis.cancel(); }catch(e){}
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest?e.target.closest('[data-go]'):null;
+  if(b) goTab(b.getAttribute('data-go'));
+});
+
+/* global speaker delegation */
+document.addEventListener('click',function(e){
+  var el=e.target.closest ? e.target.closest('[data-say]') : null;
+  if(el){ say(el.getAttribute('data-say'), parseFloat(el.getAttribute('data-rate'))||0.9); }
+});
+
+/* ---------------- 01 tide ---------------- */
+/* text markup: characters wrapped in ~...~ are the ones that fade out */
+var TIDE=[
+ { zh:"我早該去那場派對的。",
+   lv:[
+    {t:"I should have gone to the party.", ipa:"/aɪ ʃʊd hæv ɡɔn tu ðə ˈpɑr.ti/", say:"I should have gone to the party."},
+    {t:"I should ~h~ave gone to the party.", ipa:"/aɪ ʃʊd əv ɡɔn tə ðə ˈpɑr.ti/", say:"I should have gone to the party."},
+    {t:"I shoul~d h~ave gone t~o~ the party.", ipa:"/aɪ ˈʃʊdəv ɡɔn tə ðə ˈpɑrti/", say:"I should've gone to the party."},
+    {t:"I shoul~d ha~ve gone t~o th~e par~t~y.", ipa:"/aɪ ˈʃʊdə ɡɔn tə ðə ˈpɑɾi/", say:"I shoulda gone tuh the pardy."}
+   ]},
+ { zh:"你打算怎麼處理這件事？",
+   lv:[
+    {t:"What are you going to do about it?", ipa:"/wʌt ɑr ju ˈɡoʊɪŋ tu du əˈbaʊt ɪt/", say:"What are you going to do about it?"},
+    {t:"Wha~t a~re you going to do about it?", ipa:"/wʌɾ ɚ jə ˈɡoʊɪŋ tə du əˈbaʊt ɪt/", say:"What are you going to do about it?"},
+    {t:"Wha~t are y~ou go~ing t~o do abou~t~ it?", ipa:"/ˈwʌɾɚ jə ˈɡoʊɪn tə du əˈbaʊɾɪt/", say:"Whadder ya going to do aboudit?"},
+    {t:"Wha~t are y~ou ~goi~n~g t~o do abou~t~ it?", ipa:"/ˈwʌɾə jə ˈɡʌnə du əˈbaʊɾɪt/", say:"Whaddaya gonna do aboudit?"}
+   ]},
+ { zh:"你拿到很多了嗎？",
+   lv:[
+    {t:"Did you get a lot of them?", ipa:"/dɪd ju ɡɛt ə lɑt ʌv ðɛm/", say:"Did you get a lot of them?"},
+    {t:"Did y~o~u get a lot ~o~f them?", ipa:"/dɪd jə ɡɛt ə lɑt əv ðəm/", say:"Did you get a lot of them?"},
+    {t:"Di~d y~ou ge~t~ a lo~t o~f ~th~em?", ipa:"/ˈdɪdʒə ˈɡɛɾə ˈlɑɾə ðəm/", say:"Dija geda lotta them?"},
+    {t:"Di~d y~ou ge~t~ a lo~t o~f ~th~em?", ipa:"/ˈdɪdʒə ˈɡɛɾə ˈlɑɾəm/", say:"Dija geda lodda 'em?"}
+   ]},
+ { zh:"我不知道他能不能進來。",
+   lv:[
+    {t:"I do not know if he can come in.", ipa:"/aɪ du nɑt noʊ ɪf hi kæn kʌm ɪn/", say:"I do not know if he can come in."},
+    {t:"I don't know if ~h~e can come in.", ipa:"/aɪ doʊnt noʊ ɪf i kən kʌm ɪn/", say:"I don't know if he can come in."},
+    {t:"I d~on'~t know if ~h~e c~a~n come ~i~n.", ipa:"/aɪ dəˈnoʊ ɪf i kən kʌm ən/", say:"I dunno if he kn come in."},
+    {t:"I d~on'~t know i~f h~e c~a~n come ~i~n.", ipa:"/aɪ dəˈnoʊ ɪfi kŋ̍ kʌm ən/", say:"I dunno iffy kn come in."}
+   ]},
+ { zh:"倒杯咖啡給她。",
+   lv:[
+    {t:"Give her a cup of coffee.", ipa:"/ɡɪv hɜr ə kʌp ʌv ˈkɔ.fi/", say:"Give her a cup of coffee."},
+    {t:"Give ~h~er a cup ~o~f coffee.", ipa:"/ɡɪv ɚ ə kʌp əv ˈkɔfi/", say:"Give her a cup of coffee."},
+    {t:"Give ~h~er a cu~p o~f coffee.", ipa:"/ˈɡɪvɚ ə ˈkʌpə ˈkɔfi/", say:"Giver a cuppa coffee."},
+    {t:"Give ~h~er a cu~p o~f coffee.", ipa:"/ˈɡɪvɚəˈkʌpəˈkɔfi/", say:"Giver acuppa coffee."}
+   ]}
+];
+var tIdx=0,tLv=0;
+var tideLine=document.getElementById('tideLine'),
+    tideIpa=document.getElementById('tideIpa'),
+    tideZh=document.getElementById('tideZh'),
+    tideRange=document.getElementById('tideRange'),
+    tideCount=document.getElementById('tideCount'),
+    tideTicks=document.getElementById('tideTicks');
+
+function renderTide(){
+  var s=TIDE[tIdx], L=s.lv[tLv], parts=L.t.split("~"), html="",i;
+  for(i=0;i<parts.length;i++){
+    var esc=parts[i].replace(/&/g,"&amp;").replace(/</g,"&lt;");
+    html += '<span class="g'+(i%2===1?' gone':'')+'">'+esc+'</span>';
+  }
+  tideLine.innerHTML=html;
+  tideIpa.textContent=L.ipa;
+  tideZh.textContent=s.zh;
+  tideCount.textContent=(tIdx+1)+" / "+TIDE.length;
+  var sp=tideTicks.children;
+  for(i=0;i<sp.length;i++){ sp[i].classList.toggle('on', i===tLv); }
+}
+tideRange.addEventListener('input',function(){ tLv=parseInt(this.value,10)||0; renderTide(); });
+document.getElementById('tideSpk').addEventListener('click',function(){
+  say(TIDE[tIdx].lv[tLv].say, [0.55,0.75,0.92,1.08][tLv]);
+});
+document.addEventListener('click',function(e){
+  var b=e.target.closest?e.target.closest('[data-tide]'):null;
+  if(!b) return;
+  tIdx = b.getAttribute('data-tide')==='next' ? (tIdx+1)%TIDE.length : (tIdx-1+TIDE.length)%TIDE.length;
+  renderTide();
+});
+renderTide();
+
+/* ---------------- table builders ---------------- */
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+function buildTable(el, head, rows, opt){
+  opt=opt||{};
+  var h="<thead><tr>";
+  for(var i=0;i<head.length;i++) h+="<th>"+esc(head[i])+"</th>";
+  h+="</tr></thead><tbody>"+rows+"</tbody>";
+  el.innerHTML=h;
+}
+function spk(text){ return '<button class="spk" data-say="'+esc(text).replace(/"/g,'&quot;')+'" title="朗讀">🔊</button>'; }
+
+/* 02 母音表 */
+var VOWEL=[
+ ["and","/ænd/","/ən/ · /n̩/","bread and butter"],
+ ["can","/kæn/","/kən/ · /kn̩/","I can see it"],
+ ["at","/æt/","/ət/","look at this"],
+ ["as","/æz/","/əz/","as soon as possible"],
+ ["than","/ðæn/","/ðən/","better than that"],
+ ["that (連接詞)","/ðæt/","/ðət/","I think that he knows"],
+ ["of","/ʌv/","/əv/ · /ə/","a cup of tea"],
+ ["from","/frʌm/","/frəm/","far from here"],
+ ["for","/fɔr/","/fɚ/","thanks for coming"],
+ ["to","/tu/","/tə/","go to school"],
+ ["was","/wʌz/","/wəz/","it was fine"],
+ ["some","/sʌm/","/səm/","I need some help"],
+ ["in","/ɪn/","/ən/","in the morning"]
+];
+(function(){
+  var r="";
+  for(var i=0;i<VOWEL.length;i++){
+    var v=VOWEL[i];
+    r+='<tr><td class="w-en">'+esc(v[0])+'</td>'+
+       '<td><span class="ipa s">'+esc(v[1])+'</span></td>'+
+       '<td><span class="arrow">→</span> <span class="ipa w">'+esc(v[2])+'</span></td>'+
+       '<td class="zh">'+esc(v[3])+' '+spk(v[3])+'</td></tr>';
+  }
+  buildTable(document.getElementById('tblVowel'),["字","強讀式","弱讀式","例句"],r);
+})();
+
+/* 03 功能詞 */
+var FUNC=[
+ ["aux","have","/hæv/","/həv/ · /əv/","I should have known"],
+ ["aux","has","/hæz/","/həz/ · /əz/","she has gone"],
+ ["aux","had","/hæd/","/həd/ · /əd/","if I had known"],
+ ["aux","do","/du/","/də/ · /d/","what do you think"],
+ ["aux","does","/dʌz/","/dəz/","what does he want"],
+ ["aux","are","/ɑr/","/ɚ/","the books are here"],
+ ["aux","were","/wɝ/","/wɚ/","they were late"],
+ ["aux","will","/wɪl/","/l̩/","that will do"],
+ ["aux","would","/wʊd/","/əd/ · /d/","I would like some"],
+ ["aux","must","/mʌst/","/məs/","you must go now"],
+ ["prep","to","/tu/","/tə/","nice to meet you"],
+ ["prep","for","/fɔr/","/fɚ/","this is for you"],
+ ["prep","of","/ʌv/","/ə/","a lot of people"],
+ ["prep","from","/frʌm/","/frəm/","a letter from home"],
+ ["prep","at","/æt/","/ət/","meet at seven"],
+ ["prep","in","/ɪn/","/ən/","in a minute"],
+ ["pron","you","/ju/","/jə/","how are you doing"],
+ ["pron","your","/jʊr/","/jɚ/","take your time"],
+ ["pron","him","/hɪm/","/ɪm/","tell him now"],
+ ["pron","her","/hɜr/","/ɚ/","ask her first"],
+ ["pron","them","/ðɛm/","/əm/","give them back"],
+ ["pron","us","/ʌs/","/əs/","let us try"],
+ ["conj","and","/ænd/","/ən/ · /n̩/","rock and roll"],
+ ["conj","but","/bʌt/","/bət/","slow but sure"],
+ ["conj","or","/ɔr/","/ɚ/","two or three"],
+ ["conj","a","/eɪ/","/ə/","a good idea"],
+ ["conj","the","/ði/","/ðə/","the best one"],
+ ["conj","than","/ðæn/","/ðən/","more than enough"]
+];
+function renderFunc(kind){
+  var r="";
+  for(var i=0;i<FUNC.length;i++){
+    var f=FUNC[i];
+    if(kind!=="all" && f[0]!==kind) continue;
+    r+='<tr><td class="w-en">'+esc(f[1])+'</td>'+
+       '<td><span class="ipa s">'+esc(f[2])+'</span></td>'+
+       '<td><span class="arrow">→</span> <span class="ipa w">'+esc(f[3])+'</span></td>'+
+       '<td class="zh">'+esc(f[4])+' '+spk(f[4])+'</td></tr>';
+  }
+  if(!r) r='<tr><td colspan="4" class="zh">沒有項目。</td></tr>';
+  buildTable(document.getElementById('tblFunc'),["字","強讀","弱讀","句中"],r);
+}
+renderFunc("all");
+document.addEventListener('click',function(e){
+  var b=e.target.closest?e.target.closest('[data-filter]'):null;
+  if(b) renderFunc(b.getAttribute('data-filter'));
+});
+
+/* 03 H-drop */
+var HDROP=[
+ ["tell him","tell 'im","/ˈtɛlɪm/"],
+ ["ask her","ask 'er","/ˈæskɚ/"],
+ ["give her","giv'er","/ˈɡɪvɚ/"],
+ ["does he","duzee","/ˈdʌzi/"],
+ ["is he","izee","/ˈɪzi/"],
+ ["did he","didee","/ˈdɪdi/"],
+ ["what's his name","whats-iz name","/ˈwʌtsɪz neɪm/"],
+ ["I saw him","I saw 'im","/aɪ ˈsɔɪm/"]
+];
+(function(){
+  var r="";
+  for(var i=0;i<HDROP.length;i++){
+    var h=HDROP[i];
+    r+='<tr><td class="w-en">'+esc(h[0])+'</td>'+
+       '<td><span class="arrow">→</span> <b>'+esc(h[1])+'</b></td>'+
+       '<td><span class="ipa w">'+esc(h[2])+'</span></td>'+
+       '<td>'+spk(h[0])+'</td></tr>';
+  }
+  buildTable(document.getElementById('tblH'),["寫的","聽到的","音標",""],r);
+})();
+
+/* 04 tables */
+function simpleTable(id, head, data){
+  var r="";
+  for(var i=0;i<data.length;i++){
+    var d=data[i];
+    r+='<tr><td class="w-en">'+esc(d[0])+'</td>'+
+       '<td><span class="arrow">→</span> <span class="ipa w">'+esc(d[1])+'</span></td>'+
+       '<td class="zh">'+esc(d[2]||"")+'</td>'+
+       '<td>'+spk(d[3]||d[0])+'</td></tr>';
+  }
+  buildTable(document.getElementById(id),head,r);
+}
+simpleTable('tblFlap',["字/詞組","實際發音","聽起來像",""],[
+ ["water","/ˈwɑɾɚ/","哇-ㄌㄦ"],["better","/ˈbɛɾɚ/","貝-ㄌㄦ"],["butter","/ˈbʌɾɚ/","巴-ㄌㄦ"],
+ ["city","/ˈsɪɾi/","西-ㄌ一"],["little","/ˈlɪɾl̩/","禮-ㄦ"],["party","/ˈpɑrɾi/","趴-ㄌ一"],
+ ["get it","/ˈɡɛɾɪt/","ge-dit","get it"],["a lot of","/əˈlɑɾə/","a lo-da","a lot of money"],
+ ["shut up","/ʃəˈɾʌp/","shu-dup","shut up"]
+]);
+simpleTable('tblStopT',["字/詞組","實際發音","說明",""],[
+ ["that","/ðæʔ/","尾音卡住不放"],
+ ["sit down","/sɪʔ daʊn/","t 不爆破，直接接 d","sit down"],
+ ["button","/ˈbʌʔn̩/","t 後接 n，成音節鼻音"],
+ ["mountain","/ˈmaʊʔn̩/","同上"],
+ ["written","/ˈrɪʔn̩/","同上"],
+ ["football","/ˈfʊʔbɔl/","t 被 b 擋住"]
+]);
+simpleTable('tblPal',["寫的","聽到的","組合",""],[
+ ["did you","/ˈdɪdʒə/","d + y → dʒ","did you"],
+ ["would you","/ˈwʊdʒə/","d + y → dʒ","would you"],
+ ["don't you","/ˈdoʊntʃə/","t + y → tʃ","don't you"],
+ ["what are you","/ˈwʌɾərjə/","閃音 + 弱讀","what are you"],
+ ["miss you","/ˈmɪʃə/","s + y → ʃ","miss you"],
+ ["as usual","/əˈʒuʒuəl/","z + y → ʒ","as usual"]
+]);
+simpleTable('tblClus',["寫的","聽到的","消失的音",""],[
+ ["next day","/nɛks deɪ/","t","next day"],
+ ["last time","/læs taɪm/","t","last time"],
+ ["old man","/oʊl mæn/","d","old man"],
+ ["kindness","/ˈkaɪnnəs/","d"],
+ ["hand bag","/ˈhæn bæɡ/","d","hand bag"],
+ ["most people","/moʊs ˈpipl̩/","t","most people"]
+]);
+
+/* 05 elision + contraction */
+var ELIDE=[
+ ["probably","prob'ly","/ˈprɑbli/"],["family","fam'ly","/ˈfæmli/"],
+ ["interesting","int'resting","/ˈɪntrəstɪŋ/"],["comfortable","comf'table","/ˈkʌmftəbl̩/"],
+ ["every","ev'ry","/ˈɛvri/"],["different","diff'rent","/ˈdɪfrənt/"],
+ ["chocolate","choc'late","/ˈtʃɑklət/"],["camera","cam'ra","/ˈkæmrə/"],
+ ["vegetable","veg'table","/ˈvɛdʒtəbl̩/"],["temperature","temp'rature","/ˈtɛmprətʃɚ/"],
+ ["restaurant","rest'rant","/ˈrɛstrɑnt/"],["favorite","fav'rite","/ˈfeɪvrət/"],
+ ["several","sev'ral","/ˈsɛvrəl/"],["business","bus'ness","/ˈbɪznəs/"]
+];
+(function(){
+  var r="";
+  for(var i=0;i<ELIDE.length;i++){
+    var e=ELIDE[i];
+    r+='<tr><td class="w-en">'+esc(e[0])+'</td>'+
+       '<td><span class="arrow">→</span> <b>'+esc(e[1])+'</b></td>'+
+       '<td><span class="ipa w">'+esc(e[2])+'</span></td>'+
+       '<td>'+spk(e[0])+'</td></tr>';
+  }
+  buildTable(document.getElementById('tblElide'),["拼寫","口語","音標",""],r);
+})();
+
+var CONTR=[
+ ["going to","gonna","/ˈɡʌnə/","I'm gonna leave"],
+ ["want to","wanna","/ˈwɑnə/","I wanna go"],
+ ["got to","gotta","/ˈɡɑɾə/","I gotta run"],
+ ["have to","hafta","/ˈhæftə/","you hafta try"],
+ ["has to","hasta","/ˈhæstə/","he hasta know"],
+ ["ought to","oughta","/ˈɔɾə/","you oughta ask"],
+ ["kind of","kinda","/ˈkaɪndə/","it's kinda cold"],
+ ["sort of","sorta","/ˈsɔrɾə/","sorta works"],
+ ["out of","outta","/ˈaʊɾə/","get outta here"],
+ ["a lot of","alotta","/əˈlɑɾə/","alotta people"],
+ ["cup of","cuppa","/ˈkʌpə/","a cuppa tea"],
+ ["let me","lemme","/ˈlɛmi/","lemme see"],
+ ["give me","gimme","/ˈɡɪmi/","gimme a break"],
+ ["don't know","dunno","/dəˈnoʊ/","I dunno"],
+ ["should have","shoulda","/ˈʃʊdə/","I shoulda called"],
+ ["would have","woulda","/ˈwʊdə/","I woulda helped"],
+ ["could have","coulda","/ˈkʊdə/","we coulda won"],
+ ["what are you","whatcha","/ˈwʌtʃə/","whatcha doing"]
+];
+(function(){
+  var r="";
+  for(var i=0;i<CONTR.length;i++){
+    var c=CONTR[i];
+    r+='<tr><td class="w-en">'+esc(c[0])+'</td>'+
+       '<td><span class="arrow">→</span> <b>'+esc(c[1])+'</b></td>'+
+       '<td><span class="ipa w">'+esc(c[2])+'</span></td>'+
+       '<td class="zh">'+esc(c[3])+' '+spk(c[3])+'</td></tr>';
+  }
+  buildTable(document.getElementById('tblContr'),["完整形式","口語","音標","例句"],r);
+})();
+
+/* ---------------- 06 quiz ---------------- */
+var CAT={
+ V:{name:"母音弱化 schwa", fix:"回到 02 母音退位，把強讀／弱讀對照表逐字唸過，重點在「不用力」。"},
+ F:{name:"功能詞強弱讀判斷", fix:"回到 03 功能詞，先判斷詞性：內容詞重讀、功能詞弱讀。"},
+ H:{name:"/h/ 脫落與代名詞", fix:"回到 03 下半 H-drop 表，練 tell him / ask her 這類黏音。"},
+ T:{name:"閃音 T 與停頓 T", fix:"回到 04 ①②，先確認 /t/ 的前後環境再決定變哪一種。"},
+ P:{name:"顎化與連音", fix:"回到 04 ③，記住 d+y→dʒ、t+y→tʃ、s+y→ʃ 三條規則。"},
+ E:{name:"音節省略與縮合", fix:"回到 05，把省略形式當成新單字背，聽得懂優先於說得出。"}
+};
+var QUIZ=[
+ {id:"q01",c:"F",q:'聽到 "Whaddaya gonna do?"，完整句子是？',
+  o:['What do you want to do?','What are you going to do?','Why do you have to do it?'],a:1,
+  e:'what are you → whaddaya（閃音 T + are 弱讀 /ɚ/ + you 弱讀 /jə/）；going to → gonna。',
+  s:'What are you going to do?'},
+ {id:"q02",c:"E",q:'"I shoulda called her." 的完整形式是？',
+  o:['I should call her.','I should have called her.','I shall have called her.'],a:1,
+  e:'should have → should\'ve → shoulda，have 的 /h/ 脫落、母音弱化成 /ə/。',
+  s:'I should have called her.'},
+ {id:"q03",c:"V",q:'在 "I can swim." 這句裡，can 通常念成？',
+  o:['/kæn/ 完整強讀','/kən/ 或 /kn̩/ 弱讀','/keɪn/'],a:1,
+  e:'肯定句中的 can 是助動詞，弱讀成 /kən/。相對地 can\'t 反而重讀 — 這是分辨兩者最可靠的線索。',
+  s:'I can swim.'},
+ {id:"q04",c:"T",q:'下列哪一組的 /t/ 會念成閃音（像「ㄌ」）？',
+  o:['stop it now','a lot of money','last time'],a:1,
+  e:'閃音條件是 /t/ 夾在兩母音之間、後音節不重讀。a lot of → /əˈlɑɾə/。',
+  s:'a lot of money'},
+ {id:"q05",c:"P",q:'"Dija eat yet?" 寫成完整句是？',
+  o:['Do you eat yet?','Did you eat yet?','Did he eat yet?'],a:1,
+  e:'did you 的 /d/ 遇到 /j/ 顎化成 /dʒ/，變成 /ˈdɪdʒə/。',
+  s:'Did you eat yet?'},
+ {id:"q06",c:"H",q:"\"Tell 'im I called.\" 中的 'im 是？",
+  o:['them','him','them all'],a:1,
+  e:'him 在非重讀位置 /h/ 脫落成 /ɪm/，黏在前一個字尾。them 弱讀則是 /əm/。',
+  s:'Tell him I called.'},
+ {id:"q07",c:"F",q:'哪一句的 in 不會弱化？',
+  o:['She lives in Taipei.','Please come in.','I saw him in the morning.'],a:1,
+  e:'come in 的 in 是副詞、位於句尾且承載語意，必須重讀 /ɪn/。介系詞 in 才會弱化成 /ən/。',
+  s:'Please come in.'},
+ {id:"q08",c:"E",q:'"comfortable" 的自然美式發音有幾個音節？',
+  o:['4 個音節','3 個音節','5 個音節'],a:1,
+  e:'/ˈkʌmf.tə.bl̩/ — 中間的 -or- 音節整個省略掉了。',
+  s:'comfortable'},
+ {id:"q09",c:"E",q:'"a cuppa coffee" 的 cuppa 來自？',
+  o:['cup for','cup of','cup up'],a:1,
+  e:'of 弱讀到只剩 /ə/，/v/ 消失，於是 cup of → /ˈkʌpə/。',
+  s:'a cup of coffee'},
+ {id:"q10",c:"V",q:'"He wenta the store." 這裡發生了什麼？',
+  o:['went 拼錯了','to 弱讀成 /tə/ 並黏到 went 後面','the 被省略了'],a:1,
+  e:'to 弱讀為 /tə/，並與前字連讀成一個節奏單位。',
+  s:'He went to the store.'},
+ {id:"q11",c:"T",q:'"button" 的 /t/ 屬於哪一種變化？',
+  o:['閃音 T','停頓 T（後接成音節 /n̩/）','顎化'],a:1,
+  e:'/t/ 後接 /n/ 時舌尖不放開，氣流從鼻腔釋放：/ˈbʌʔn̩/。',
+  s:'button'},
+ {id:"q12",c:"F",q:'哪一類詞在句子中「幾乎不會」被弱化？',
+  o:['介系詞','實義動詞與名詞','助動詞'],a:1,
+  e:'內容詞（名詞、實義動詞、形容詞、副詞、疑問詞）承載訊息，一律重讀。',
+  s:'I need the book.'},
+ {id:"q13",c:"V",q:'"a piece of cake" 裡的 of 最可能念成？',
+  o:['/ɑf/','/ə/','/oʊf/'],a:1,
+  e:'of 弱讀到只剩 schwa，/v/ 在子音前常整個脫落。',
+  s:'a piece of cake'},
+ {id:"q14",c:"F",q:'句尾的 are 為什麼不能弱讀？「Yes, they are.」',
+  o:['因為 are 是內容詞','因為句尾的助動詞承載語意，必須重讀','因為 are 沒有弱讀式'],a:1,
+  e:'功能詞在句尾、被省略後接成分時要回到強讀式 /ɑr/。這是弱讀規則最重要的例外。',
+  s:'Yes, they are.'},
+ {id:"q15",c:"T",q:'"I need to sit down." 中 sit 的 /t/ 會怎樣？',
+  o:['念成閃音 /ɾ/','停頓 T：舌尖到位但不放開','完全消失'],a:1,
+  e:'後面接子音 /d/，/t/ 失去爆破，只留下短暫的停頓。',
+  s:'I need to sit down.'},
+ {id:"q16",c:"P",q:'"Would you mind?" 快速說出時，would you 聽起來像？',
+  o:['/wʊd ju/','/ˈwʊdʒə/','/ˈwʊlju/'],a:1,
+  e:'d + y 顎化為 /dʒ/，加上 you 弱讀成 /ə/。',
+  s:'Would you mind?'},
+ {id:"q17",c:"H",q:'"Whatsizname?" 還原後是？',
+  o:["What's his name?","What is the name?","What size name?"],a:0,
+  e:'his 的 /h/ 脫落成 /ɪz/，整串連讀成 /ˈwʌtsɪzneɪm/。',
+  s:"What's his name?"},
+ {id:"q18",c:"E",q:'下列何者「不是」省略後的自然念法？',
+  o:['fam\'ly (family)','int\'resting (interesting)','stu\'dent (student)'],a:2,
+  e:'student 是重音在第一音節的雙音節字，沒有可省略的弱音節。省略只發生在重音後的弱音節。',
+  s:'student'},
+ {id:"q19",c:"V",q:'"and" 弱讀到最極端時，只剩下什麼？',
+  o:['一個成音節的 /n̩/','完整的 /ænd/','/ənd/'],a:0,
+  e:'rock and roll → /ˈrɑkn̩ˈroʊl/，母音與 /d/ 全部消失，只剩鼻音撐住那個音節。',
+  s:'rock and roll'},
+ {id:"q20",c:"T",q:'"Get out of here!" 裡有幾個閃音 T？',
+  o:['0 個','2 個（get out、out of）','1 個'],a:1,
+  e:'get out 的 t 在母音間 → 閃音；out of 的 t 同樣在母音間 → 閃音，整串成 /ˈɡɛɾaʊɾə hɪr/。',
+  s:'Get out of here!'},
+ {id:"q21",c:"F",q:'"I can\'t swim." 的 can\'t 在美式口語中通常？',
+  o:['弱讀，聽不見 /t/','重讀且母音拉長，/t/ 常只剩停頓','和 can 完全同音'],a:1,
+  e:'否定式一律重讀。美式的 /t/ 常不爆破，所以「有沒有聽見 t」不可靠，要聽「母音是不是又長又清楚」。',
+  s:"I can't swim."},
+ {id:"q22",c:"H",q:'"Ask her first." 自然語速下最接近哪個？',
+  o:['/æsk hɜr fɜrst/','/ˈæskɚ fɜrst/','/æsk ˈhɜrs/'],a:1,
+  e:'her 的 /h/ 脫落成 /ɚ/，直接黏上 ask 的尾子音。',
+  s:'Ask her first.'},
+ {id:"q23",c:"P",q:'"I miss you." 中 miss you 會融合成？',
+  o:['/mɪs ju/','/ˈmɪʃə/','/ˈmɪtʃu/'],a:1,
+  e:'s + y 顎化為 /ʃ/，you 弱讀成 /ə/。',
+  s:'I miss you.'},
+ {id:"q24",c:"E",q:'"I dunno if he can come." 的 dunno 是？',
+  o:["do not know","don't know","did not know"],a:1,
+  e:'don\'t know 高頻連用而整併，/t/ 消失、母音弱化成 /dəˈnoʊ/。',
+  s:"I don't know if he can come."}
+];
+/* ---- 錯題本資料層（Leitner 三盒） ---- */
+var BOX_GAP=[0,0,1,3];   /* 盒 1 今天、盒 2 +1 天、盒 3 +3 天 */
+function dstr(d){ return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+function addDays(n){ var d=new Date(); d.setDate(d.getDate()+n); return dstr(d); }
+function getWrong(){ try{ return JSON.parse(LS.get('red_wrong')||'{}')||{}; }catch(e){ return {}; } }
+function setWrong(o){ LS.set('red_wrong',JSON.stringify(o)); }
+function getGrad(){ try{ return JSON.parse(LS.get('red_grad')||'[]')||[]; }catch(e){ return []; } }
+function setGrad(a){ LS.set('red_grad',JSON.stringify(a)); }
+function qById(id){ for(var i=0;i<QUIZ.length;i++){ if(QUIZ[i].id===id) return QUIZ[i]; } return null; }
+
+function markWrong(id){
+  var w=getWrong(), it=w[id]||{b:1,d:dstr(new Date()),w:0,r:0};
+  it.b=1; it.d=dstr(new Date()); it.w=(it.w||0)+1;
+  w[id]=it; setWrong(w);
+  var g=getGrad(), gi=g.indexOf(id); if(gi>=0){ g.splice(gi,1); setGrad(g); }
+}
+function markRight(id){
+  var w=getWrong(); if(!w[id]) return;
+  var it=w[id]; it.r=(it.r||0)+1; it.b=(it.b||1)+1;
+  if(it.b>3){
+    delete w[id]; setWrong(w);
+    var g=getGrad(); if(g.indexOf(id)<0){ g.push(id); setGrad(g); }
+  }else{
+    it.d=addDays(BOX_GAP[it.b]); w[id]=it; setWrong(w);
+  }
+}
+function dueIds(){
+  var w=getWrong(), t=dstr(new Date()), out=[];
+  for(var id in w){ if(w.hasOwnProperty(id) && w[id].d<=t) out.push(id); }
+  return out;
+}
+function openIds(){ var w=getWrong(),o=[]; for(var id in w){ if(w.hasOwnProperty(id)) o.push(id); } return o; }
+
+/* ---- 主測驗 ---- */
+var quizAnswers={};
+(function(){
+  var box=document.getElementById('quizBox');
+  document.getElementById('qTotal').textContent=QUIZ.length;
+  var done={},score=0;
+  function paint(){
+    var html="";
+    for(var i=0;i<QUIZ.length;i++){
+      var Q=QUIZ[i];
+      html+='<div class="q" data-qi="'+i+'"><p class="stem"><span class="num">Q'+(i+1<10?'0':'')+(i+1)+'</span>'+esc(Q.q)+' '+spk(Q.s)+'</p><div class="opts">';
+      for(var j=0;j<Q.o.length;j++){
+        html+='<button class="opt" data-qi="'+i+'" data-oi="'+j+'">'+esc(Q.o[j])+'</button>';
+      }
+      html+='</div><p class="fb"><span class="pill">'+esc(CAT[Q.c].name)+'</span>'+esc(Q.e)+'</p></div>';
+    }
+    box.innerHTML=html;
+  }
+  paint();
+  box.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('.opt'):null;
+    if(!b) return;
+    var qi=parseInt(b.getAttribute('data-qi'),10), oi=parseInt(b.getAttribute('data-oi'),10);
+    if(done[qi]) return;
+    done[qi]=true;
+    var Q=QUIZ[qi];
+    var wrap=box.querySelector('.q[data-qi="'+qi+'"]');
+    var opts=wrap.querySelectorAll('.opt');
+    for(var k=0;k<opts.length;k++){
+      if(k===Q.a) opts[k].classList.add(k===oi?'right':'reveal');
+      else if(k===oi) opts[k].classList.add('wrong');
+    }
+    wrap.querySelector('.fb').classList.add('on');
+    var ok=(oi===Q.a);
+    quizAnswers[Q.id]=ok;
+    if(ok){ score++; } else { markWrong(Q.id); }
+    document.getElementById('qScore').textContent=score;
+    document.getElementById('qProg').textContent='已作答 '+Object.keys(done).length+' / '+QUIZ.length;
+    renderAnalysis(quizAnswers);
+    renderReview();
+    if(Object.keys(done).length===QUIZ.length){
+      var best=parseInt(LS.get('red_best')||'0',10);
+      if(score>best){ LS.set('red_best',String(score)); }
+      refreshLog();
+    }
+  });
+  document.getElementById('qReset').addEventListener('click',function(){
+    done={};score=0;quizAnswers={};
+    document.getElementById('qScore').textContent='0';
+    document.getElementById('qProg').textContent='';
+    document.getElementById('qAnalysis').innerHTML='';
+    paint();
+  });
+})();
+
+/* ---- 錯題分析 ---- */
+function renderAnalysis(ans){
+  var el=document.getElementById('qAnalysis');
+  var ids=Object.keys(ans);
+  if(!ids.length){ el.innerHTML=''; return; }
+  var tot={},bad={},order=[];
+  for(var i=0;i<QUIZ.length;i++){
+    var Q=QUIZ[i];
+    if(!ans.hasOwnProperty(Q.id)) continue;
+    if(!tot[Q.c]){ tot[Q.c]=0; bad[Q.c]=0; order.push(Q.c); }
+    tot[Q.c]++; if(ans[Q.id]===false) bad[Q.c]++;
+  }
+  var rows="",weak=[];
+  for(var j=0;j<order.length;j++){
+    var c=order[j], right=tot[c]-bad[c], pct=Math.round(right/tot[c]*100);
+    var cls = pct>=80?'':(pct>=50?'warn':'bad');
+    if(pct<80) weak.push({c:c,pct:pct});
+    rows+='<div class="barrow"><div class="lbl">'+esc(CAT[c].name)+'</div>'+
+          '<div class="bartrack"><div class="barfill '+cls+'" style="width:'+pct+'%"></div></div>'+
+          '<div class="barnum">'+right+'/'+tot[c]+'</div></div>';
+  }
+  weak.sort(function(a,b){ return a.pct-b.pct; });
+  var diag="";
+  if(!weak.length){
+    diag='<div class="diag"><b>目前沒有明顯弱項。</b><span>各類別正確率都在 80% 以上，可以直接進入 07 跟讀錄音，把辨識轉成產出。</span></div>';
+  }else{
+    for(var k=0;k<Math.min(weak.length,3);k++){
+      diag+='<div class="diag"><b>'+esc(CAT[weak[k].c].name)+'　'+weak[k].pct+'%</b><span>'+esc(CAT[weak[k].c].fix)+'</span></div>';
+    }
+  }
+  var wrongList="";
+  for(var m=0;m<QUIZ.length;m++){
+    if(ans[QUIZ[m].id]===false){
+      wrongList+='<div class="wrongitem"><div class="qt">'+esc(QUIZ[m].q)+'</div>'+
+        '<p class="zh" style="margin:3px 0 0"><b>正解：</b>'+esc(QUIZ[m].o[QUIZ[m].a])+'　'+spk(QUIZ[m].s)+'</p>'+
+        '<p class="zh" style="margin:2px 0 0">'+esc(QUIZ[m].e)+'</p></div>';
+    }
+  }
+  el.innerHTML =
+    '<hr class="rule"><h2 class="sec">錯題分析</h2>'+
+    '<p class="sec-note">已作答 '+ids.length+' 題。橫條是各弱化類型的正確率。</p>'+
+    '<div class="card"><div class="bars">'+rows+'</div>'+diag+'</div>'+
+    (wrongList?'<h2 class="sec">這次答錯的題目</h2><div class="card">'+wrongList+'</div>':'')+
+    '<p class="zh">答錯的題目已自動存入錯題本，可到 <b>09 錯題複習</b> 依排程重練。</p>';
+}
+
+/* ---- 複習引擎 ---- */
+var rvQueue=[], rvPos=0, rvRight=0;
+function renderReview(){
+  var due=dueIds(), open=openIds(), grad=getGrad();
+  document.getElementById('rvDue').textContent=due.length;
+  document.getElementById('rvOpen').textContent=open.length;
+  document.getElementById('rvGrad').textContent=grad.length;
+  var w=getWrong(), html="";
+  if(!open.length){
+    html='<div class="empty"><b>錯題本是空的</b>先到 06 聽辨測驗作答，答錯的題目會自動收進來。</div>';
+  }else{
+    var t=dstr(new Date());
+    for(var i=0;i<QUIZ.length;i++){
+      var Q=QUIZ[i]; if(!w[Q.id]) continue;
+      var it=w[Q.id], isDue=it.d<=t;
+      html+='<div class="wrongitem"><div class="qt">'+
+        '<span class="pill b'+it.b+'">盒 '+it.b+'</span>'+esc(Q.q)+'</div>'+
+        '<p class="zh" style="margin:3px 0 0">'+esc(CAT[Q.c].name)+
+        '　錯 '+(it.w||0)+' 次 / 對 '+(it.r||0)+' 次　'+
+        (isDue?'<b style="color:#B4432F">今天待複習</b>':'下次：'+esc(it.d))+'</p></div>';
+    }
+  }
+  document.getElementById('rvList').innerHTML=html;
+}
+
+function startReview(all){
+  var ids = all ? openIds() : dueIds();
+  if(!ids.length){
+    document.getElementById('rvArea').innerHTML=
+      '<div class="card"><div class="empty"><b>今天沒有到期的題目</b>'+
+      (openIds().length?'錯題本裡還有題目，但排程還沒到。想提前練可按「不管排程，全部練一次」。':'先去 06 聽辨測驗累積錯題。')+
+      '</div></div>';
+    return;
+  }
+  /* 洗牌 */
+  for(var i=ids.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var tmp=ids[i]; ids[i]=ids[j]; ids[j]=tmp; }
+  rvQueue=ids; rvPos=0; rvRight=0;
+  paintReviewCard();
+}
+
+function paintReviewCard(){
+  var area=document.getElementById('rvArea');
+  if(rvPos>=rvQueue.length){
+    var n=rvQueue.length;
+    area.innerHTML='<div class="card"><div class="empty"><b>這一輪完成</b>'+
+      '答對 '+rvRight+' / '+n+' 題。答對的題目已升盒，答錯的退回盒 1，今天可以再練一次。</div>'+
+      '<div class="btnrow" style="justify-content:center"><button class="btn solid" id="rvAgain">再練一輪</button></div></div>';
+    renderReview(); refreshLog();
+    return;
+  }
+  var Q=qById(rvQueue[rvPos]);
+  if(!Q){ rvPos++; paintReviewCard(); return; }
+  var w=getWrong(), it=w[Q.id]||{b:1,w:0,r:0};
+  var idx=[],k;
+  for(k=0;k<Q.o.length;k++) idx.push(k);
+  for(k=idx.length-1;k>0;k--){ var j=Math.floor(Math.random()*(k+1)); var t2=idx[k]; idx[k]=idx[j]; idx[j]=t2; }
+  var opts="";
+  for(k=0;k<idx.length;k++){
+    opts+='<button class="opt" data-rv="'+idx[k]+'">'+esc(Q.o[idx[k]])+'</button>';
+  }
+  area.innerHTML=
+    '<div class="card">'+
+    '<p class="zh" style="margin:0 0 8px">第 '+(rvPos+1)+' / '+rvQueue.length+' 題　'+
+      '<span class="pill b'+it.b+'">盒 '+it.b+'</span><span class="pill">'+esc(CAT[Q.c].name)+'</span></p>'+
+    '<div class="q" style="margin-top:0"><p class="stem">'+esc(Q.q)+' '+spk(Q.s)+'</p>'+
+    '<div class="opts" id="rvOpts">'+opts+'</div>'+
+    '<p class="fb" id="rvFb">'+esc(Q.e)+'</p></div>'+
+    '<div class="btnrow" id="rvNextRow" style="display:none">'+
+      '<button class="btn solid" id="rvNext">下一題 →</button></div>'+
+    '</div>';
+}
+
+document.addEventListener('click',function(e){
+  var t=e.target;
+  if(!t.closest) return;
+  var o=t.closest('#rvOpts .opt');
+  if(o){
+    var opts=document.querySelectorAll('#rvOpts .opt');
+    if(opts[0].disabled) return;
+    var Q=qById(rvQueue[rvPos]);
+    var chosen=parseInt(o.getAttribute('data-rv'),10);
+    for(var i=0;i<opts.length;i++){
+      var v=parseInt(opts[i].getAttribute('data-rv'),10);
+      opts[i].disabled=true;
+      if(v===Q.a) opts[i].classList.add(v===chosen?'right':'reveal');
+      else if(v===chosen) opts[i].classList.add('wrong');
+    }
+    document.getElementById('rvFb').classList.add('on');
+    if(chosen===Q.a){ rvRight++; markRight(Q.id); } else { markWrong(Q.id); }
+    document.getElementById('rvNextRow').style.display='flex';
+    renderReview();
+    return;
+  }
+  if(t.closest('#rvNext')){ rvPos++; paintReviewCard(); return; }
+  if(t.closest('#rvAgain')){ startReview(true); return; }
+});
+
+document.getElementById('rvStart').addEventListener('click',function(){ startReview(false); });
+document.getElementById('rvAll').addEventListener('click',function(){ startReview(true); });
+document.getElementById('rvClear').addEventListener('click',function(){
+  if(!confirm('清空錯題本與結業紀錄？此動作無法復原。')) return;
+  LS.del('red_wrong'); LS.del('red_grad');
+  document.getElementById('rvArea').innerHTML='';
+  renderReview();
+});
+renderReview();
+
+/* ---------------- 07 shadowing + recorder ---------------- */
+var SHADOW=[
+ {en:"I should have gone to the party.", red:"I shoulda gone tuh the pardy.", tip:"should have → shoulda；to → tə；party 的 t 是閃音。"},
+ {en:"What are you going to do about it?", red:"Whaddaya gonna do aboudit?", tip:"what are → whadder（閃音）；you → yə；about it 連成 aboudit。"},
+ {en:"Give her a cup of coffee.", red:"Giver a cuppa coffee.", tip:"her 的 h 脫落黏到 give；cup of → cuppa。"},
+ {en:"Did you get a lot of them?", red:"Dija geda lodda 'em?", tip:"did you 顎化；get a / lot of 皆閃音；them → 'em。"},
+ {en:"I don't know if he can come in.", red:"I dunno if 'e kn come in.", tip:"don't know → dunno；he 的 h 脫落；can → kn。"},
+ {en:"Tell him I'll be back in a minute.", red:"Tell 'im I'll be back ina minute.", tip:"him → 'im；in a → ina；minute 的 t 是停頓 T。"}
+];
+(function(){
+  var box=document.getElementById('shadowBox'), html="";
+  for(var i=0;i<SHADOW.length;i++){
+    var s=SHADOW[i];
+    html+='<div class="shadow-item" data-si="'+i+'">'+
+      '<div class="shadow-en">'+esc(s.en)+'</div>'+
+      '<div class="shadow-red">'+esc(s.red)+'</div>'+
+      '<p class="zh" style="margin:4px 0 0">'+esc(s.tip)+'</p>'+
+      '<div class="btnrow">'+
+        '<button class="btn sm" data-say="'+esc(s.en)+'" data-rate="0.65">慢速</button>'+
+        '<button class="btn sm" data-say="'+esc(s.en)+'" data-rate="0.95">一般</button>'+
+        '<button class="btn sm solid" data-say="'+esc(s.red)+'" data-rate="1.05">弱化版</button>'+
+        '<button class="btn sm rec" data-rec="'+i+'">● 錄音</button>'+
+        '<button class="btn sm ghost" data-dl="'+i+'" disabled>下載</button>'+
+      '</div><div class="player" id="pl'+i+'"></div></div>';
+  }
+  box.innerHTML=html;
+
+  var rec=null, chunks=[], activeIdx=-1, blobs={};
+  function stopRec(){
+    if(rec && rec.state==='recording'){ rec.stop(); }
+  }
+  box.addEventListener('click',function(e){
+    var rb=e.target.closest?e.target.closest('[data-rec]'):null;
+    var db=e.target.closest?e.target.closest('[data-dl]'):null;
+    if(db){
+      var di=db.getAttribute('data-dl');
+      if(!blobs[di]) return;
+      var a=document.createElement('a');
+      a.href=URL.createObjectURL(blobs[di]);
+      a.download='shadow-'+(parseInt(di,10)+1)+'.webm';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      return;
+    }
+    if(!rb) return;
+    var i=rb.getAttribute('data-rec');
+    if(rec && rec.state==='recording'){
+      stopRec();
+      if(String(activeIdx)===String(i)) return;
+    }
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+      alert('這個瀏覽器不支援錄音。請改用 Chrome 或 Safari。'); return;
+    }
+    activeIdx=i;
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+      chunks=[];
+      try{ rec=new MediaRecorder(stream); }
+      catch(err){ alert('無法開始錄音：'+err.message); return; }
+      rec.ondataavailable=function(ev){ if(ev.data && ev.data.size) chunks.push(ev.data); };
+      rec.onstop=function(){
+        var blob=new Blob(chunks,{type:'audio/webm'});
+        blobs[activeIdx]=blob;
+        var pl=document.getElementById('pl'+activeIdx);
+        if(pl){ pl.innerHTML=''; var au=document.createElement('audio');
+          au.controls=true; au.src=URL.createObjectURL(blob); pl.appendChild(au); }
+        var dl=box.querySelector('[data-dl="'+activeIdx+'"]');
+        if(dl) dl.disabled=false;
+        rb.textContent='● 錄音'; rb.classList.remove('live');
+        stream.getTracks().forEach(function(tr){ tr.stop(); });
+      };
+      rec.start();
+      rb.textContent='■ 停止'; rb.classList.add('live');
+    }).catch(function(){
+      alert('無法取得麥克風權限。請在瀏覽器設定中允許麥克風。');
+    });
+  });
+})();
+
+/* rubric */
+var RUBRIC=[
+ "重讀的內容詞聽起來明顯比其他字長、響、清楚。",
+ "功能詞（to / of / and / for）短到幾乎聽不出母音是什麼。",
+ "字與字之間沒有停頓，一口氣說完一個意群。",
+ "母音之間的 /t/ 有拍出閃音，沒有一板一眼念成 /t/。",
+ "整句的節奏是「強—弱—強」，而不是每個字等長。",
+ "錄音回放時，我能聽出自己哪個字弱化得不夠。"
+];
+(function(){
+  var box=document.getElementById('rubricBox'), html="";
+  for(var i=0;i<RUBRIC.length;i++){
+    var on=LS.get('red_rub_'+i)==='1';
+    html+='<label class="chk'+(on?' done':'')+'" data-ri="'+i+'"><input type="checkbox"'+(on?' checked':'')+'><span>'+esc(RUBRIC[i])+'</span></label>';
+  }
+  box.innerHTML=html;
+  box.addEventListener('change',function(e){
+    var lab=e.target.closest?e.target.closest('.chk'):null;
+    if(!lab) return;
+    var i=lab.getAttribute('data-ri');
+    var on=lab.querySelector('input').checked;
+    LS.set('red_rub_'+i, on?'1':'0');
+    lab.classList.toggle('done',on);
+  });
+})();
+
+/* ---------------- 08 log ---------------- */
+function today(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+function getDays(){ try{ return JSON.parse(LS.get('red_days')||'[]')||[]; }catch(e){ return []; } }
+function refreshLog(){
+  var days=getDays();
+  document.getElementById('stDays').textContent=days.length;
+  var best=LS.get('red_best');
+  document.getElementById('stBest').textContent = best? (best+'/'+QUIZ.length) : '—';
+  document.getElementById('stWrong').textContent = dueIds().length;
+  /* streak: 從今天（或昨天）往回連續計算 */
+  var streak=0, d=new Date();
+  function key(x){ return x.getFullYear()+'-'+('0'+(x.getMonth()+1)).slice(-2)+'-'+('0'+x.getDate()).slice(-2); }
+  if(days.indexOf(key(d))<0){ d.setDate(d.getDate()-1); }
+  while(days.indexOf(key(d))>=0 && streak<400){ streak++; d.setDate(d.getDate()-1); }
+  document.getElementById('stStreak').textContent=streak;
+  /* dots: last 30 days */
+  var dots="", dd=new Date(); dd.setDate(dd.getDate()-29);
+  for(var j=0;j<30;j++){
+    var k=dd.getFullYear()+'-'+('0'+(dd.getMonth()+1)).slice(-2)+'-'+('0'+dd.getDate()).slice(-2);
+    dots+='<div class="dot'+(days.indexOf(k)>=0?' on':'')+'" title="'+k+'"></div>';
+    dd.setDate(dd.getDate()+1);
+  }
+  document.getElementById('dots').innerHTML=dots;
+}
+document.getElementById('btnCheck').addEventListener('click',function(){
+  var days=getDays(), t=today();
+  if(days.indexOf(t)<0){ days.push(t); LS.set('red_days',JSON.stringify(days));
+    document.getElementById('checkMsg').textContent='已記錄 '+t+'。';
+  }else{
+    document.getElementById('checkMsg').textContent='今天已經記錄過了。';
+  }
+  refreshLog();
+});
+document.getElementById('btnClear').addEventListener('click',function(){
+  if(!confirm('清除所有練習紀錄與測驗成績？此動作無法復原。')) return;
+  LS.del('red_days'); LS.del('red_best');
+  LS.del('red_wrong'); LS.del('red_grad');
+  document.getElementById('rvArea').innerHTML='';
+  renderReview();
+  for(var i=0;i<RUBRIC.length;i++) LS.del('red_rub_'+i);
+  document.getElementById('checkMsg').textContent='紀錄已清除。';
+  var chks=document.querySelectorAll('#rubricBox .chk');
+  for(var j=0;j<chks.length;j++){ chks[j].classList.remove('done'); chks[j].querySelector('input').checked=false; }
+  refreshLog();
+});
+refreshLog();
+
+/* ---------------- 10 母音山谷 ---------------- */
+(function(){
+var BLK={"66": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEUAAAD1sab+/f34qan/f3/////0raH1sKX0saXyrqN+fn6Li4v86eaqqqr62NKJiYmJiYmJiYn3w7uUlJSIiIj2sqf4ysL74d2JiYmHh4f8ubT2s6dVVVX0q56Hh4fyrqWRkZH3s6j//3//AAC/f3/vrZ5tbW2qqlXrnJzzr6Pzr6X/v3/5tKj/zJkAAAAAAAC+SVfMAAAAMHRSTlMA/v8JAgH+slItBPP/A/+Mrs7//lDV//8ULQ0tA/9yTw1wAgEEIQcDDXCXBI0FAAAbTYiqAAACn0lEQVR42u2ZiZKiMBCGO4REDTcIKHg7s/e+/+ttB0VxPDgSZmu38ntUROnP7vwklg1gZGRkZPSvi9kHe4hYPwxlw79hj3NtfBRlORugssBzvY6cA8B0QoYq3X8Deg22qqne6i53eB+OqVDTJukS9b5uJVHVtiYJmAc7CWGwCT66jabKIFKeMmBi54QMaybYMglu547CD3UOSQt2SihwFviM99ARHwpHiQ5V0yTYzgkkZwXLZA43pAL2WkATCfIwoeWiyiyKFrcZUZhoAaUFHAUsHVTgeTBPcLBp5mRrApECGCaUBPMw2QCLkg0O5g07aANRDIWWw5BRBAucKhD4ahTQ1yr+Av0mreDJeWrUTiOIMRFFX5AWVsmAvJLGAa2kB0LHWQJskggHi5FAeJuHUbDE3KqBaC54WkHnBES9pDIYC4SbhPAqmucJIWA80KvN1YAMyID0g/jngLifrTuEXfsxVwFxjGB1yInHVrbmfDgoJiS33HYOsSxfpXTct6Rc3s6Ryvjw0rkn0svq1Rx/rWKGdtI6PnFyruK6+ttaMX+M4ufy3tW3t71rUk4eoPCQe+YoX7AXEvrqAwpf5tYTzqCVwa1ReYzB+RnCSXZ5w+da1rp6GqqQmWRg3Cy/Hsy4pkW1kZQsU+43INXsaVu9Oc+aqKbcJ34cuk1wHj9C+eSJ7RX2I4zo37Lc7ClGbeOrnHaGuX78gqK+w1aGi+OrzcfcynkrxPw4MSADMiADMiAD+lsgbX9H/4bjS5C+P9hZW4+qJHpaBj9bulSeltqllLU14GxWaABtH7Sq7u2wVYPgj77vHTiSNEs19HQ6keh+OCr99d6RU7Ut2Ww63U77Cs8oKXTmyKatQk+a2n0+fbTpG+2vN3pgYGRkZGT0P+oPPAY03d7E9G8AAAAASUVORK5CYII=", "62": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEX/sWPyrqSVlZXmm5X//wD//3+/v3+RkZH/AAD/f//zraTzr6X/xqoAAAD1sab+/f30raH/f3/1rqX9qqn619H0saX+vr30sKV/f3/////zqp74y8T4w7qIiIj86uaKioqTk5OKioqqqqqJiYmIiIiHh4eJiYn1s6b74d31sab2saZVVVWHh4e/f39oaGj5tKizUDCZAAAAMHRSTlMDYwYNAQIEkwECgc4JAP7//gImBP9SBXkDAf///5T/7v4RA85QLLQt/7LOA3cEBZW1y7erAAADCUlEQVR42u2aiZKiMBCGnWvvhmBQE24E8db3f7vtACoeA0gSaneK36rRoax8ptOXtCPoSaMBNIAG0AAaQLpA3PqwOuiDPQfitPsH/sZbg37gW/8sl+MOWopPSFuCEDM+boyO2sxolcTm+ZIMxW9AHN6OhpQm9XsqQZzTtScHMl5OJAapz/BvvEsSPwZeBY1AmnPZE4vDjG0ZZFGWRUlcBVGYGPLaUP6Oi81hF8Ww5RBmAGmUwvwCsvhGAciYieUYj0MfRGSlKXuNr0AWLFVwjDWuhMv64SIuTuSAm1vk0AKkxnIoii4NixDlzznM8XXkw/ZyRlOYqQJZDPzIT/1ohxzOwiSecw2gMRpuK3wAklA4eIaGq8aRUtABXSHGczoA7i2F03F1AJFHOoHQdEkSQxwmwrV3AKUHdtrRXWh7tn0GbXH9MAvDBcKiJEmiziBim/cyyAmEGWeRJT6ezasv9D3tvCPXvpN7MR0U6wJ7lFSfPCPnTsSogLBI4EPkIpZLj9dZtWViAH0R0Dn89YKIsVp5pA+Qa5puLyBvAP3zoDtneOTt3UDEqVRQR+youFDma++Bt3cBEeO65KxMM6j8G5imIlB+KnXyHFWms2s5AVHmDN4t1taT667bqYozVPur/znX9QVyeskMeCLuSj8IKUHu0ZpBxAvK0NELEl5QRGigtZQXnKA5ViVBxChs1qIDkgQFl+8kOkH5htpzJEAilTrtW8nuoNWjDdkrWzkIj+j+KpqT9AQKSA+mI1pAD5zBEdeIfvfOL3lEe8DmnIBoTkH4lPdgHtGWVN2iBS4Kk020lAn7XCbKF59zZAvfTYdK9JVyOzhj7NoUK92clHeaXKMhk8u3W/m3leby19sNjWkDaK/qdvQUeC2Iw1gJZ/M5pxwZcP5bzchg2gBSZDv6zhvnRz/XT/QgXUZVJcjiU+l5y6/akdhp9MbgbS07EBu1GiZiAEwkUMcl8JbjUY5vnC4nz+tlMhHzUdp+4EubhrY1otZzI2y6p89rTzkffmYwgAbQABpAXxL0F7r/XyZnka2LAAAAAElFTkSuQmCC", "45": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEWwr6/zsKbwpqBVVVWIiIj2tKlgXl7/AACTk5O/v3///3/42dRCPz+Bf3//AP//v3/2r6P//6oAAAD+/v5YVVX6tKj1urD2w7pOSkrV1dX+qan///+qqqr53Nf0tKqYl5f1taz2s6mLiopoZmZycHB/f3+IiIiJiYnKysrt6OeJiYn2s6j/f3+Hh4eJiYmJiYk+SmEsAAAAMHRSTlP/ahcDb6//AREEAvz//wEE/gMA/v/7Cf3//wMBA/tM/zeU+v//A7HL//6R0QJPDSkirfwYAAACoUlEQVR42u3aC3OiMBAAYOpZa3vvFTAmKDSYYFDw//+725C2gtcC8rrpTXYcdTKOH7uJiFkdmCgcC1nIQhay0FgQewq6BDvdBlHW/YAfWWuI4UtpNIu6hK8PsyWE2e/uva5xvKNlKfii74WpaxU6waxg1l3CUPU5Oa+Of/S87aprfEXsTWIwTzEfyNJUpvKMz96gH2yGzqpPbH95EQTGyXmqqyfDBCMDdoF+wl1PB5PyjrPiLQWkfAkCIXldugfwPU/1hFaet4Pf+u1yLjGLAhJgCvcCUdj1TgiL593rWRIwD88i11AiOVZOXCAfK7ftDSnveMLigMCEUp0MzlHKeXkx+PA8AIS184EFkIVZIBMhirV3DucjQUwkCWDVzEIXegGOAgnMgScJ53IJWRYI0RJSB4zqkB7ZfAgFcE6llAjlkODyxjqaT1cDFH4jhFSkDQ4Q/nHpzGKW3CwGvOUM2kDEdd3K8W9woB4KgmWQzfHMgLkl8xxGg2pOqsNDQs+LwO8JwcaFJsvIQhay0L+CDjajdpCKS+HqiOOaIdfpCm3cm4J8AohMBKl4/xrxvpgRfLgaWZRGHPs5spCFLGShTwHF00DEUe4kUIg/zKeAzJfjVNBqFIgcJoAcUrn8GA866NLtJ4BWC7d9Sr2gYjWQUP29G8XDQSG1KK4SXR6WgvPYJSRWQ0JmlpCqhj7fqUEzwoX3/qXwfuA50iedmJC6S+7BIEzq+6IdRBuhxu3ozVWod7ejmd6OroEG3WCvgxjQgVoGjw1tHTpAE2SrmyAPDRA7Yfto3dPBhGiLRlXUq1Glyo2q2h7fS+ttve7ce2vXejPNxGP3ZuLzrKFteWmP6qatv+sWEW3fHu3Z8KXiphb2iXaLJ2b/ZmAhC1nIQv8l9AfraEDizWk+qgAAAABJRU5ErkJggg==", "49": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEX2qJf/v39/AACqqlWSkpL/AP/zraTzr6X/1KoAAAD1sab++/v+qqn0raGqqqr0sKX+vr31saf0saT2sab//wD50sx/f3/////86eb4zMSIiIiKiorzqZ374t2Tk5OJiYn/f3+JiYmHh4eJiYmJiYn3xLzyraP//39VVVWWlpb2sab3sqf//6qIiIj/AADwrqIuTzrlAAAAMHRSTlMNBAIDjQFr1QYA/v8E/gPZBTdMlAH/BAH//6/y///+LgIVbpHP/04CAwV2qwNRAS6kij9yAAACsElEQVR42u3a23qiMBAAYPa8E0hELQkQlHPVttu+/9vtACpIt2BD4GK/zAXtRZ3fmRxAUwsWCstABjKQgQw0FyQOTCVE8jnIEepvePS1LSTwT521SrytXXw9uxPC6jfPRDVWTxY4bVZ2PP/gjPegBCx1pqYeu1J33G+gBNwVmRhXSUCW10BWFHl6lhrox+H3ZIeQNXyrknFI9zlwAfk+DGWRCtFCX+BJJTPtdc9NGiiXKV5j5PCSAb9CD2ARHVE3TwCXOQgGf/Yx5yDDDuTAo1I9doA1Ud+/VLbF1mDaDIWU18VAimgLuUqdu0L2BVpVrRMci8hDYKdin2XFPoZjB9rqgRx44FXLWFhg19JQyv25c9ohIXgRAoRFnZ1nMp4JYjg0siikDHHi8RN28QhTIXKFSAsdIM5DXD41BJlMBZ8EUc/uxWWMmrShhPNKYjANKj0Mexd4XmDb1bWFGDuxLGM4G+Lv521hQutoRCNilxGlkW9HUURvK/rgNjF1jLrTu0nL645dxmeWdTRDRUtDJPDIMhCl80NehEwVs0LV6JT1L2VJ54WIf9kW5oUwfRlUUc7cunoidIZoCkTfPYH866lEx6zz/XdZI8/+QFKHqrtBX6rvEPorsvtSVDmedoj2pboeXKfaK+pJg8606X0jRYPOxHXUkRqHknmgRrJx9Q/3TcPO0Eg7OlKPhi0Id0+c0KOOhr0O20aDUUfTpjruaIP8iCwD7aiBDGQgAxnIQB/fj5aAKAmIt0xF7cegmaF7vvs2kIFI9+voIciBjRboGV6GIQGuFmgzBmFJOnr3yxKvI5BIXC3HOs7o0VsC62kIbk8/h5zr0dsB3lZTz3Re7jxM/LpRp1ZbZ7Ce7vFotQbWG7Wozkeduw98Xxc68K2rctTiIMy/GRjIQAYy0H8J/QWQ+rd6ujasMQAAAABJRU5ErkJggg==", "47": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEWKioqIiIiKior0sqfvrJ33tKlVVVX/AAD/v3/40svjtKz//wCAfX3//38/PDxBPj6/v3//AP//zMwAAAD+/v76tKhZVlb1urD2w7pOS0v+qqn///+qqqr519Gko6P0tKr1taz1s6loZWXp6OiIiIhhXl6WlpZ/f3+IiIiIiIi3trbV1dX/f394dnbHx8f1sqeOLzIBAAAAMHRSTlMdYJRsGbIDAQT79wH/Av//BAEFAP77/wn9/wMBA/v/TDeA//72//4Dzan//wL//9epWGbqAAAC1klEQVR42u3aW3eiMBAAYECq1rZ7iwQhVC1kuSP//9/tJHgBt42QAOfsnswDx/qQz8kMsWVqoJnC0JCGNKQhDU0FkbdAJkg5DPJ9+Q/sk94Q+1ju0T5KBaN6QsAcnhzJ2NQLuy0tg+bKIulCJbI5s5MJjh3EOZ2hcmXXjvO+lY0IsMVFSpBpLRGBa5ZZlomSNuRDPluVeL/mRJBBMxQQlNI0TWOrDflooegwqXbJqkkoNtjqwPGXyxtEftXOsyK0ZSn94GsyAcI0IKu0XSMfHZUTYik9sb3jCSWXXovPJWqgNeycckKQUu2jF5AgC4slAp1tUQORG+SiD4WOa+2di0gACZlBRpNrV6BpoISXJaPXrlhOAwVQFuhqSlMDXl9bYTB02pzyQgSVyIDbNKM0g5a7tcJgCHueFwu3rlmWbV27FQZDIcbe/gEUBEZgmnAyINO8OlNAgkNVCOX7/b4YCiXB7duiJxRBWb7HM2QUddaeEvqtIQ1pSEMa0pCG/mUIzwQVDMpngE4erH2aAdoDhKMZoAqgcIZfiXkv0A4UTwLlXrsXOEQngSrcLhH7cRqI91xrZdqp2IgQ7TT3uQeL8aGCrRveZxiPD7He7rZz2K3ZSFB+n1Czd1+lJA2xg7vd25f76v49ZYh3QvXZkYTzMSG+cX+3GKsbtPz5/eikDBV8k+LPNxR7OKxeqyrE33JFiP2RjL3Pbs4i5KmyhyhwjSM1iDtf3JtR1Uj3xZKBGqd9JnTLF3o8n26rSEAF9rDomweOiJi+QoViRSgqCir44hn1CIpF+YwJ0f12HiiSeNS5sR9Aoz2OdtnjaAE03gN2Ip62rNisJVKFdjBvWT8Y66xHGYI4/svqAfTzza9HG+uIB1XIVxtUPbcGVcIZ33n0tttJz94WvUZvisNEp/6wUdl3PMru3INcHN3+49E+Q1vRwLccNMIufbkgRP+bgYY0pCEN/ZfQH6Y6YQUiZjeCAAAAAElFTkSuQmCC", "44": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEXttq324NxZWVn/AAD//3+UlJSqVVX/v3/Tn5OqqlXwraLzsKYAAAD+/v5ZVlb8tan16eZOS0v0sab2w7v///+qqqr/qqr/f3/1taz0tKqKiYlgXl53dXV/f3+Xlpagnp5qaGi3traJiYmqqanY2NiIiIiIiIjJycmIiIiIiIj3y8OJiYmIiIjvrKL5t7D1s6iNO8XLAAAAMHRSTlPh+wMBAgoDBAwDSJ8A/v/+/f+5/QEDAwI1TPn//wL+////qv//y2z/jVL7EjUxEXZ5yqD3AAADWklEQVR42u2aC3OiMBCAae3r7lZINIjGhIKAQH39/393ScCWWkRIwLm5YWccKSP7sZvNbpKtBXcSawSNoBE0gkbQUCBCXB0hpBNosiDa70sWk9YgT3yOSz05ls+3ARF4Wc0cXZmtXqDiD5efL8glaAEHSz4x1xH5oHUQOm5b5MFS/PhhqisP4ukDPJ21ZltQNu2yHHgV5JGjMGZqIh+Oc/TUOLmw9xWIw9bfw2MV5MIfQ850Ondm8Esq47ChXI0Np5szpwApx01NxXGWMvT42SAXcmEQr4KOcHI+jEEfzglepf4N3XFXEEmSwM6tghYwMwiEr4CYCU0cdjSDJFMG5S7Nwf0CEQFCxiAkQJ4AZXT3SDf8GRLKd3TL+SCgwiBINiCGKodnWgb6AKCtnyQJFfGWqQsRGKQLCElpBdpvhFCakVxdJFvCu4CYvbZpmzEqRBikYsAVBj12ch3DNm4HEiWNu9vc5Vx8P2f7jsHA7LagpqTaq0Xf6wTnw4LuZtEI+odAD/ogVCtqHl3ci0Of4VAblAqd6x9iS7m8gzEOYgPXRYHdVpjZGNHWoNgAhCLpkktRan/eRQag0Pej9wvx36U3A/FduRdFYTpO2BE0JOgepTz1mUo4A4OioJyvw4LSAJ/TzaAgH3/ltSFB9MyR3hsQVNqDbeaHaZrGQ4HCIgZsP+6wP9IAocIc1g5jAFKOw37HHV93kDKoA0cbpEaITYcHydDG6RWdcRyjvkAiX9vBlZcXL4GDvkBBQy6QccL6Aq0bQoH2CQruCLoadPIlWJ9RZ9dnhRTXWasLivDVaGByKof9ZoawruaqZNvbPCqLUVjPqYkTbVBs12U7VBYp1GM9KlTioGIUioo1BI56rbCsrLABDWOxlUxDusbXlw8GIHReAn3uj8o/Wd+LE8RwzTbvStCbrevE9u8SY0eDrFRj+umxwnk+0i98zcfRKGLl9tVeswjdOI5uBN08YEexFYahFaMWB+xNoP5aBk832jpykObGHYNZA+ezrXNwDLsToq2zJN7NRhWBlWg1IYPDdcf5DaRFj69svc3nur23lq03SXo7WZZmL9GyTm/NnEp7VA7kcqUnSwJAWjd8ycKgQ32zWfythT3xFnriTWD8N4MRNIJG0Aj6H0F/AXSUR9r+VH6uAAAAAElFTkSuQmCC", "46": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEUAAAD1sab+/f30raH+qamqqqr0sKX51tD1sab0saT+vr71saf//wD85+T///9/f3/0qp73wrn4y8P74t2KioqIiIiJiYmUlJT/f3+GhoaIiIiJiYmKioqIiIiVlZVXV1fwraT/AADzrqT//3/zrqT/v3/7tqv5tamqVVWqqlXni4v/mZn/qlX0qp/wrJ0AAABXb/dNAAAAMHRSTlMA/v//BAPZ/5RLBDcB/wEE/////+6vyv4CUGyOES4KBDMBUgJxBGiyAwMLBQMYIgAHAOPYAAAC+UlEQVR42u2ZaZOiMBCGOwTEi3AIqHjOODt77///eduJuMJIDhO+zFbeKiVS2o9vp5NYNoCXl5eX12cXY5GN2OY5TMisv+HLE59l+Nb5wkbnRcg/b8hB97OvxFaT9x8Q3oNFp9sgfeSE9hiBOt9JTOXnz4Q46vVGYtDs2sGugZ4ntgmdOYQsQFRfCvv1jsePYLve4nO33uBNEYBS+jAazN5FgCLYlXsOSlldfzAEoQpD8pzQ3kiiGU8eg32549PEDR36oBBmcg5JAlRBOyOZpvCFZ65ZH45HXC5pWR1PvcqYw1TOCa6Ks/w2kpIm8IKOMD5UlQCWZbntelKAuIuY5PjMOe1IRpqEsBSGorpO031ZNtu6lz05iObcC219FRnNiMISghikdQXAHwcsOTFfRqA4CPg1izmIXu8kRA5KsQLKui7Lao+lkKZQVk+B+DVIaOeOBPQdDruqqjiIrybENmagAsNifCoKrh0lqjm6RsQFhMtpXVfr+shMioFPDsblU4WoVUayQj1HS8Aj7Rg1Dd9Ot1XdpMDMyjsWJG4n4dVQBPLMdRxJpCpvHn9FYrGOElK0CdSBTuKcwMM3ZcYges2ZqL1cyXF0JEhi/jO1H2fQjcQrUL4rjAFqSVqOO+hK0nJGALULVsOxBtEPVd69QUcE0bz3sugFHzRnB8JiXtH+kX4fr3CTGAkkimw1PCnIGTzS7UDiBEqknKGt1S51UlLLycYrhmGSnGNf3kMkad5cFuwAScVx2BkeSEqOyxZ0I1Ht/LjudTdSZsBx21SvJFyeVJM35927JeHWrfHjfpQXQVLkBdH5GeEozwn+6I61nBGOcnzo/YxzwhIDzmggVR2MC6Ie5EEe5EEe5EEe5EGfCqTtUMGrHpQn2p9b4g92ZY8K5voWR0YINe23KCzpcif+t9Vl7qe2KzZWWycyaLwtnDlv2sRx/YKzo6eZEQfgAt/e7VGT6W+DvP1rW8JiZqdzCIZ+nm3aujaLN6GdLkvf/vfy8vL6L/UXH+hA0LfjIRsAAAAASUVORK5CYII=", "63": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEXzrqTrsJz//wAAAAD1sab+/f30raH////+qqn62NL/f3/0sqj0saTyr6T/v3/1saX0qp74wrl/f3/4zMT86uaLi4uJiYmIiIiJiYmJiYmGhoaUlJSqqqpVVVWIiIj5tar74d2Hh4f3sqf1sqb2sqf//3+Wlpb/AABoaGjyrqTzr6W/f3+/v39/f3+QkJD0qp+x+eXSAAAAMHRSTlOUDQEA/v/+AQT/Ai9TLQRm//8C///z0BOrkDT8AwNxE/9Kjq/NAgYBBUt1BAQgihjAvy0xAAADXElEQVR42u2aa3eiQAyG3c0ww8Vuud8ERVvtdXf//7/bMAMKVhFnmH7YQ3pOSz2tT5O8SQbSBXyTLWbQDJpBM2gG6QIxe29L2N5+uQtkm/J/8CcbD0LMxnEeJMwxxa+PArEXcHbPRNKedxvo+OQX/C39kvn+GYi9sB1RsuWwTw2Isc2TEoYS8t6SfMjTBD8n6zjOksbTBlTAziOq1vrk+3H8WpaQrtI0ihPGTiATHDKBmfw9fVivcih9iGOAfLUG/wTag0zgKO1GjtTB+1WDkiiFA15stz5Loi7Iho0MJwjc9toS2oOfdRbWUZ608svQuRPIhKUUyLAEyQ0N8RJqnEESoWUHBkWxjlYZlCcxfEiBOKmOmWsZTewcrB3MULbNEFC8lvmfuOfRL3iU07RXk9zA8JpsPYDJuAYgjQ7ckSTKJgBxEnKOuXJqgaMUEsiipBbDAeIUCnVQTQrbTInQFehMAq9xzBp5T+IRz0945NSgEvIoSqPVFsO3itMoalqDIgjjVvU9wo88i9Oct6A0zn53W5A0yA3Oc8RARAr841gAdRDndFXHQTgk/KLkY8LHS1AHYX64L706GhwTkiCrjRmtGpIWECWhd1RBWOn0iJx3b22gLzYJiHbGj0YQJVXl0e8AeYaYCTNoBn0FXVK7HIi69GQuQZB4wa0NKRfULgeyelYZRtj5NjSMqUB1sIbs1FGVPRoGTSeG/u1FgDnS1Oto11zvKIbG5oIdCeJ1pB2ECQks/SCkhFzQmkF42mkqRy8I77aEhWGgE9Q0otu1qgiiRGBGnIAUQdaV9jkxiDvkUaIfVLdSd/xRUh5kXXLIqqzJQVhC5BxErwwjZdCoF7WEDouXfoMY3OB6M5pS3oOKVyjYqs68e95idbWgoKkc/MJbn0d1NdUwEEdgMZiuj4uJxsTtsaQ2+Lywd3AcmkoTjfJmYug8nGB2+NHeI1TzcUvcrdwcf7dBUg9v7weZ8DYNaIOP0IdAcg/YLyx37FvbFhuepgAt4PMGaKLYmdcj16519rBQX+u8D62q2kWV/eNZEePtBldix9UbmIppeoTBJemi89R4qYDaPQzkp78eZfiDf53l/fa2XDqb8evRWnt7+YWvad+3wjZl7EPs9uZ/M5hBM2gGzaD/D/QPoAvAttbM6nsAAAAASUVORK5CYII=", "60": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEWTk5PytKqIiIjyr5phXl6Li4v1sadVVVWJiYn1s6j/AAD64d2/v3/2w7lCPj60amr//wD/zar/AP/Av8AAAAD+/v5ZVlb6tqv1urFOS0v/////f3/2t6n0s6n519H1rqP1s6j3zMWJiYn/v39+fn7Y2Njq6OiWlZVnZWV4dnbIx8f8qqmIiIiIiIinpqa2trbQMhR1AAAAMHRSTlMV1q0U/9FWA06xAfwE+/8DAQcB/wD+//sJ/wECJWH7/oH7+AQF//7+////BJFy//8t6JKxAAADtklEQVR42u3ZaXOjIBgAYMzd9N4FjeRoSvE+8v//3YJoNRE1BdzZ2ZEvbSYZHoEXXgQA/1IBEzRBEzRBEzQWtE++VMpTgn8CbRONB072d0P8l4fVUaWsDuwZpY+J29Aevh4tR7k8HGCjTZRWlZf/1dAezjnz/KlUOHWs21S3g35/AE3nEakW//PDOVcShdkMQIxpRsgSQNqAfuHEcp6RTnl0nJWQKAYkhWANs2DGKCDaJKAveHQcpFdOjpNscVFlSng7KJmxD0EmmlRAW95xviaEntkwffGOKypnf0i6BpQ1roYSeNBuEO+8Bx55azgjG14tIBkserGGeM99akPIcd4hXjOAkGBGZdAOnp2TCWjOaoazIANZkI4K7Vilax4DrPtYMGSYjgjx4QcCSvlAjQRhCpcsuAFv1nJJ4SbYCGMEiAXDkq0IGG7YPywqGiuDBIrvWXdkEF8asjSjbAmCIE036+ai2oZiNxqcwCT0pBCtFlbaykctyLdt97aa23JxbTuXt4gCikW2AKAX8kObl97u8/gv3EAGdWfYW6iohBWrZ3wWxS88PQj5kVs88KUTKn5w870CxEZaSHlXILitjlOEUODakrrKkhdOhExAojK5dCm+Cn0zUFmdS1pfxHY7EHQgdLGlkohJN0bGoPLRbyQR2LIwUYcqKWpNZunQaUBVN0W3E4ggwxDyFtdSJA1sAxDywqZEehxN6EoSTuiPAjWkQD5RTUGVRIRje2gsqJTsAccAxCS3TFE9jgmoalN/1jUBVVmDoJGhMg668pMxKPgeos6cawSqnd59hDZUjk8cux2JyBAk9in27yrndkaeJkQatee9c1YPIletENLCNw9FN70V9KzfGlC5Y232VU9GUof8UDIm3blcGSqX0sXN2IduxxKhCpUbk9Z4lPug3BQUdzjdO0g1qNymSt8wO/bESlDemxYu0umkAg2lH+l7iwJE3KHkQyRB/mOonD59qaeaTlovy95CTNNL/2lGe7P/Q0jstgde/usgJ74q5Pt+zraj3uAJDQs91vSXUCMYLi/RPSesgR17cZBrQEF052m3bnh7CCkfo+luIP8xaD4APRk6jrbe4VsvhI0csJ/YAXsycFGFXy39vuO3IE8DUAJXBi5BrDneDl297eGDo3cNcvpgoZAM3vFhvGPSyde4PaqujwYuEzGcnx2dYvU79WUimwCHs/WhVhzrOO93Gtejb4yaH9TKDsIB5+pmGavf+OLBu+XrK2y8Vyt4uv2foAmaoAn6P6E/n5CM8UR6wlUAAAAASUVORK5CYII=", "48": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEUAAAD1sab+qan0rKH+/f2qqqr0sKX1saf1sab+vr70saT//wD87On4zsf3xLv61c7///9/f3+IiIiUlJSJiYnzqZ2KioqHh4f/f3+Hh4eJiYmJiYmVlZWIiIhVVVXzrqP//3//AADrp5fzr6X/v3/zs5z7tqv4tKmqVVWqqlX/mZnqrJ7xrqX74dz//6oAAABCPOZRAAAAMHRSTlMA/gT//wPZNpQESwH/////AQSv/s7/8G8CKRSOB04DTgIBEXEEFmiyAwMFJTn/AwCQLR+lAAACVklEQVR42u2Ze3OiMBTFL4SHWpAkhEQePmq33fd+/4+3N6lW2t2ikuC0Mzl/gDKSH+fkhsx4Aby8vLy8PrsojceIrq7DhHT0E95fcS/Fn87TMfqVhvr+CznofvE1GKvkaQ/habB4czixmP7D2Y/HGNT2RKJDftIksNQLiYJqzQclRNu9wtJVaM0JghRM9TFoyhbYBlTJeSkY69cbPNhzgmRnQDG0soENdJIDrMs1Xjhlug9caKHDo8BkCxR9SQVQvwKFsB0xLMkzc85ycrgygy86OVXWXYMoIeqGlzWcspvDbAyoiPQxiIrqmB3coyMdGefQQS1LWaqeIXegEO6MoVgIFjMuFdZd0ys7hyAKscAa4EJPD86RKUAnoABB5ARiWGdSCCk5W+NUdYA5WoEIIRWC8Kgd4bcD6DvULedcg2o0g1hlByqyLIuiLDuejCs9R88jConDt6XABdtQq2L4/S4It7QuVipGH2suVL8WLKKr3kZ3N7hFOCyGA2hjFg9uvoy6Ar1dR5M5uiEo+090k8xRb5+YDvTsZWpHS6w3o4kdaUuRXq5RNjFIb31GSzIxKCDkVXbTgW5TdR7kQR70cUBkWJU7R/lyQHnx8iq1BuEmMKScBDcBZZWz6IoiH9DSXTFU1WA1+HXkQR7kQR7kQR7kQR50BJ1r7YSwcAIyf7AP9qjg0Qlo2+8hvWPJRXbJj7NdMVdtnXOGTKPKmvNwAQdgBz8T2wn6c1EzcQffnsajktljv6tyrm0J6WKc0jlclNv1TVvbZvEqHKedxSN6eXl5eX1g/QUkKT7uKvtXVgAAAABJRU5ErkJggg==", "64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEXhmZlVVVWqqlWQkJCQkJD/qlXzr6Tyn5H//wAAAAD1sab+/Pz/f3/0raH0sKX+qqnyrqP1sqX619H86eZ/f3/zqp34zMT3xLv///+UlJSKioqHh4eIiIiqqqrzsqeKior74d2JiYmIiIiIiIj//3+JiYn2sab4tKj3uLKVlZXxr6W/f3//AADtqpv/v3/0sKbawAD3AAAAMHRSTlMMAwOh3wOe/wEA/v8C/rYDLVL//wP///8B/s5PawMq8v8RMq4CjnLRDwZOBAEkBJWhpDchAAADc0lEQVR42u2aiXLiMAyG2XsVRxhihxwkJNxH2933f7u1nUBDmwTw0dnZjaYDnnbGH5J+Sw7qCD7IRgNoAA2gATSAXIFif+M/bhs/fgxEN9qfN6b3g3yJWiwmj9tiQWUw7gQJ76djT9fGU4BGPHJeL3j8FkThZe+Z2PjllRR3e+TDwjO1CfhnzjYD5dNyOwfeBPn+wfPQELQ/+GrTHObJXLyKnyxZXYMofPfM7Tco7XFIU7V9fCzW8KkZOhuBk0Zl8KRDyg+uFnkTdICd5tZYBo2I7+CX2J8X6yUXiYq58Cy/EgMFXWEja4Jk7LhITFGkczjKVC3Tec2qQ6cDQmEhC0LxWsPGIIoRL4psniarWKZqmWScm4FwxqQRot4irEE5rJJM6LrYisVcvJ/1rQ+KAmmEqbeLR0oBxyMIva2TNE2Lr1l1fvVDh6GwHyJ00hqgVbIFQcsg+7Jer4u0PrsGOZJHPCJNMQiQ2HWbpMKZpfKDJ5lp6FT0CHkHEpat02wp1J3zfLldcWMQeoRF14UV/P42oQliRAi8BZRzfmkPl4UJiMwUBoMS3XpEAqW2sGShW1BAPFkWotozZyDPYySYzUrC0K0YhOwCIgXuWnVe3ZTxA0CyhLs/Ry03ob8dhNifHFsg7LuBoU2PCImw66jO7IFEzSRkFrZ2cfGXNp/0PbpuN11tyDxHrG1HlB+AWc0RemUbiXUEzuQcoSxmJb5LnV15X0js7S86xGhUGcJrkuIE6KIEKS2zuziGtS58JallN8e0qFYkbCxcVe/apzB6Iwz7baIi3eRY6EeKpDjouPEp7d3iWAGpCluGrlu5Ktj90rYCUhwW3CSZgip/qmoUhO5ANQerAjRzdmAraSu9qRYROSpBdVHFW03PFFQ3JGyq3HPQJq45F5J1UMXB+64mJqCWy4nSYGn5Stx+3erufpo31c4LZOdx0gJVnNb9UEY0Cu2Aqr7QdThZO0kvdFH3gemKqmboetocRuKxJbJ49+57Rm55HvwPH5ZjayDaD9L/gv3a1BfsfaDPlkYGi1uhs5Ik7I3cGfTThkuHvvFbPaj6BidTf0TgNnfM+ChMzEZv+wnQu4aJFEY7fdR+N+rnNMajsZyOTqen6aN2mp4WALC5e+B7e2jbYzR+ZIT97NMn+rg9Uf95+DeDATSABtAA+idBfwBfD7RTJY5JJwAAAABJRU5ErkJggg==", "51": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEWampqhoaGJiYmKior2s6hZWVnzsKb/AAD3s6lgXV3rpZ7z4d72w7u0tGpDPz+qVVWAf3//qlX//wD//3///6r/xsYAAAD+/v5ZVlb6tqtOS0v2urFraWn/////f3+mpaX2t6n53Nf1rqP0s6n3zMX/v3/2s6nGxsZ+fn6WlZWJiIjr6ejZ2dn8qal3dXWJiYnrTBIDAAAAMHRSTlMT6lKn0wNYAav/Jf38A/8D/wMBAgMJAP7/+/8J/wEC/yX7/mH7BJT/A/76/v8F/3CFivHVAAADkklEQVR42u2ae3OjIBTFJZpX0273idH4yKOpAqLf/9vtBdPWADEpkp3Ojqd/ZMJk/OUcgUu89fA/kjeCRtAIGkEj6E6gecaPNnri6WdAcz7gC/PsZhB8stzODjaabTeAuhH0hI+HYB/Z6vUBv8WXTkv4k++8qQb6gR8C+Pzji5UE6qB5Sg2OMryFz65CW7GXfTSTpCmeIKEGlxg3videPkBptgmix3CIdidSiRvigya49HxCJm9W2heOX6MoHKZdFPB0LkD0dOWGNvQclGIeRWwgKIzA0rEFeZBYir3SUxxxPBsYXGtpAVcSIJ9SvxRTQQVt8CHaDQYxyA7PAZT7E18QvFQHvToAQXYbnJbYa2CiUR+Sw/cC7TentTMtEcLl/UCto0kDl0S+nA4AKvtABcpvFmEKyKewaAks2KmYdWWvIxrfrlx15BOKCBJ3iFJCSdN6MoNIvL5VSIkOLjnxfZgPYlaAJp4jENFAhh21DyRSkVfqpLRWB4SoBoIdQS7XtJTqA1WFVCKzKd5FARWT4lyIGR3hmxydcIKTdAZyAar6p7cNiEgD6q27A0gkd2aA3gekJRfWAFoy56BcTU5aTELnoFokV3TrgBionYP05MRIZ9m4AunJITGSOwdpybXTvXAN0pOTk65ndluC9OTYun/SWYJqLaci7p8LdqCV/PpMu0W5a1Aua0LS1VoZyZ2A6uulT3NnBbqpxjJXk+GaKhcglig6v0XuHKmSZRydG74HiCkWTBXDCYicr1a2BFB9B5A01NkojBXDBUgaqpXtiLgHVYqhFozcg2rFkLliDAehWFme5ooxGNQGR9SiTp2DEq1kUNMtGgyS51Pt3KXtC4NBLYdoZZ6GbkEtp9YP5YVbEI31mi6rbxK6BFVJrBeedjtCLkG5scDRC4asQai1EyfnnCK+YMgKxApySi2umWEfr10ctwpK6+X7T3CiVnjTacEOlH9bvx1M4qQw1ItLx8hPgz4whgt+jy+ei61AEF2dM/PKSkJnoGVC84u/TwhzBGJVxeyf1w0+130p0P4LOXL0ODrD814QFy0QJw/Yf1/pH82hB7Jy0TLgV0Acshtq6SUKjtnVjtgvbzGwDQLNqi1+vgrK5hwaYjtr1CrqD+6j9ZZhvoiGKHjobyd6nabldhHs7RQtDlc4nfZoCqg/WzttDA+6ezrL3L7jm/Gfn+qVp5md0vHfDEbQCBpBI+j/BP0Fh/rjkw3QUYAAAAAASUVORK5CYII=", "50": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEXyrqT//wD//39dXV3wqJb/0KG/v3+QkJCQkJD/AP/0r6QAAAD1sab+/fz0raH1urD////+qamqqqr51tD0saT1saf1saf3w7v4y8R/f3/86ebzqZ2KioqJiYmJiYmIiIj74dyJiYn/f3+Hh4eIiIiKioqXl5f2sqb1saf2sqf/AADzrqX/v3+Tk5Pvq5vzrqS9uR1qAAAAMHRSTlNsAQIEDAUEqtIB1wD+//4JAQMD/0w3gP//BP//9MuQbP8QAixVrf/Wb7IBMwQGFkn5tcdpAAADUUlEQVR42u2a+5OiMAzH93mv0FjsurxRwMe63u7+///dpQUFTkUsrTN3Q2ZExh/68ZukSSXewY3sbgSNoBE0gkaQLRB/mOoYz68Dua7+F3Z5b5D8WpPZbna97WY7ieoJIszL1tG1zdvngcSVOwO6o6t6b4JyeNLHKPvq1lSB8vvPjTPQ7hQpgCJNV+lqCVOYJ0maAW+CHtytM9iUpgDm6yRJfsxB3qziJOO8BrnwprMyNq5kv574O4GWcaYWDeIVQLGW0g6g98nGMWAv8E0qiuWSUwLNeZDFKQQHkAs7HT0+U2qYiKpPtrSSVJTGCXkui+fAgxbot5bnjkGbZ7iXMYrThDxWSNBHCzSBVyMgZ0ISoPiewSPFxzKozANIkhKUGQBFCoTHipbBhwTJGE0zQ4ocpQhboJSyrqD1H+MEYNlK7+tBGLK2hViD5D6NC06QZLWmDQtDFHlC+AsmpLHQF8LDQ4yy+SpJC6CCsKSbAIaBMMLIYw5dkWJE11YyyBoOwI+KqskY0foBtQeVALJbcDOgM+l9rk38IyDho31Qq03YBEVYmlUQRaeU5Ph7VUZAePyJty8LJl2H3jEKHV+ZY9R1VG9O4FshMgGiyFeFs8tMgKhcOzcAybhfFmQCRIK8G4B6CjIAaghCtAdCsRdE0oQ9RXTQ2accLhjz0RqIHFd20RJpS5Hcq9XqUpCwFSOlwsNDFbWXdaxWEXZGaBhIBqjaQnXyWQDJqOwzrk4+4yBscBrJZxyEMijqOBrRS1wuQ5og5SsWioU6Yi/Y5UahC/L++skg0FZRDU/8NLHcYQWz22Grs0fksZs0PnT6BMiE64iz6MEx0SbCXmfkgW2iuYPQHgibCRd1owZVb9FMONG9mYZU7xZHZoWP1qp3vXTZYtFS9fbkY4TKLpTwQUV14YvafNHpPF2QYKfNepvY29kqoZ0M3imTdS8ynnXHpir5mQp7GXTNw1sUoQhPJ4Tx5wwR6rlO73H0iZmLC/edIBdmRkDbjoGLAr3DBE2A3sg33WMdM77buDQE6Qb9fHjemJiBuJcHVTAxNKi6NOPL4XNrk2NsmPg6g7zveFTu3Bct+5q5/cejfYa2XQPf/KoRdu7qGefj3wxG0AgaQSPovwT9Aa8eDmiCyXcEAAAAAElFTkSuQmCC", "43": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEWOjo6IiIj1rp7zsKZgXl73tKn/AABVVVWAfn64uHH1r6P//3///6r42dSgn5//AP//v38AAAD+/v76tKhZVlZQTU31urH2w7r////9qamqqqp5d3f53Nf0tKr1taz2s6mJiIhpZ2d/f3+VlJTr6OfW1dW4t7eIiIiop6eJiYmJiYn2s6j/f3+Hh4eHh4fKysomR5xMAAAAMHRSTlMObhho/64BA/8D8gID/P8BBAD++///Cf0BAwP/+0w3lPr/BP/+//+x/8yQ0QIvUP/GcioIAAADPklEQVR42u2aa3OqMBCGwdrT27mtEBtCtSEJVxX+/787CWBLHVAbknbmTPaDjlF52M0mu+bVgy8yz4EcyIEcyIFsgfAT0TG8/xwowvo3/ICvBmH50Wi72OrYWn6fXAmS3m9uA13b3Swger8quVOPTBrBJ6A9RC3mWcc61JA06dEe1rsgeFnp2i8JeyNh8Cv1eKjKsvIAD0B/cCQ5qzn28hhs4aHjeLQCBqSkec5Ljw1Af+FmJkc6FewW7c0zqKgHd0AkDnx+6NKkBf2AKAjETNAqCDbws70mzdt41QcGB14PQBFsZjskgxfcKhBTXrAuUozltJ+kdmAtI/cyGySC3V4GB5h0qMrVJLGKHh06gl4NgGTs1oAZ1LwmeckYeKyuaPnRI3MgzMoSIC/75XPgPjAbIDX9tCwpzT3wDx7pMt0CiMhlmue5AjGV3vWHrDMZui5iOZVJUXK1YBkDSyBCPFL7cl/1/Lz02XALMu/RxKaqCxJpEWejIEba5UoIw5OglN7TE4vHLVmGCHF9j1KKrrNQWjYrdEV4paFizhwJGo7f/chwOgOU3idj86FAp4OUpsazjkufkq9IbwdyIAdyoG8E0a8AyYLdbt6WQVkc9uXIKiiN0Vs9tQnKwneOTVBxxKhijuyBimOrkNAia5rUFijt/aGN5U61zWmUXInRB2XKIUTt997KIRTbb/JTFbilsA9SKfex5R3+jJBmCqS20XDCoWz0PU2Q3HsmZ8g46H71zR4VJkFqjqaSbrwMzsm6bDzpxleYJqhBk5VBNRDot9mdgU+lQmhsHXUzPkJqwom9SRcklu0V6UlCdL+kUWOwTHQhQstigMqSbpAarbC8r7AhLRohRJrxpB9JDPcMFL23DO1T/zIRprsgjsaOMWJhvq/LlqcoFHIrnargbxHrgkcnm6Hg8TLo3HG0yGgS9uc0cZGeO47G6jj6DOjyAXvaZNJScemAPTqvtmBjksHDBVknkpMUzFYMpAjy4wII76Ws8zyTIx2KrhCqFrOEKjEUqs5qfJJ0q6u8ddrbddJbJybu9MXE18V5zkAeVaLteqNn2wVc4BgTfCP2KQl7H+nZE3Z/M3AgB3IgB/ovQf8Al6IVNK7BhkEAAAAASUVORK5CYII=", "59": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEWSkpJaWlrzsaZbWFj/AACjoqL3s6nh1NLrpZ72w7u0tGr//6qqVVWAfn6SkpKSkpL/qlX//wD//3//xsYAAAD+/v76tqtXU1P2urBsamr/////f3/2t6n53Nf1rqP0s6n3zMX2s6j/v39+fn78qamKioqTk5OIiIiIiIjw6eiIiIiHh4f2s6iJiYmIiIiqqqqtR7dHAAAAMHRSTlMOA1f/Aeyr/SX8AwMD/2OnAwECCQD++/8J/wECJfv+YfuUBAME8P2uiv51K9PSTwPy4d5TAAACRUlEQVR42u3aC2+iQBAAYBB8tL273mNYcUFR98Wb///vblCb0ovRsoBpLjMmJiZkP2YYMNnBgQeFQxBBBBFE0ESQH8mjTTxL3gfy5YATltGnITxSxLPEJmZxiNQnoWc4JuWO2cZhBW/l467AT/urwXMX/0A/YVXi8U97q2ip5FpOuDz/AEUQ47HLwDay/Y7NTpIL9byqqnmOyaRKmQJEB+JRWLKnYEhsL5KAXBtjXmsAo9Nc6Yt0hiQcGAuGxZaVkvstpM5VKnSO6+u0A3EIGcsGQgHDlI5nyHFw4VoXwgFlOpCE2cDCnVNa4EotZJRKBWaUwunrHQohYdvBUIa1Ax+huamNroEbbbAdig/QYQQIaxcCx0xyF9qKuU5aVdp0u24saBde7hpXVNUJyFUxBXTOqMZmgwozcV1Hpe3jYSLIKLxpsbVFA6lyuJgMSrWqdOXw5tRyDUwE4ZJ1muYCOIfih8P5dNDlGX7tb2JkqBGNODlv12fSjOABGRFEEEEEEfT1oewRULacf18vraBMbXrE2vM8SygI5pt1n/DsS5f1kjLrZuiVkbex7bpMe30ukqes2zujG5YggggiiCCCCCLIdqvzC2Q00nZ0BP5NSLYjkFE22F/uzI98nIEsxxgZyDuQxNoNTWnPypfo7kTsd7MYOAbBYVUM3+5CkS9xILa1ppbsduHeR28RyAUbEuXq9jjR6Qwt40W5swu2SO44nfEoR+pPbBfhlY3uG5NlaT/xjeSvXrNyHtkFp9cMCCKIIIL+T+gvVvqEIqyqkYAAAAAASUVORK5CYII="};
+var BG={pe:"#FDE5D8",ye:"#FDF8D6",gr:"#E3F4D9",mi:"#D9F2EE",la:"#EBE2F6",pk:"#FBE1E1",cy:"#D8F0F6"};
+/* 山谷 13 格：c = 欄（0–12），lv = 往下第幾階（0 最高，6 谷底） */
+var VAL=[
+ {id:"e1",sym:"ē",kk:"i",b:[66],c:0,lv:0,bg:BG.pe,no:"11",ow:"tea",name:"咧嘴音",
+  tip:"舌前、最高，嘴角往兩側拉開像微笑。長而緊。",
+  sp:[["e","me"],["e_e","Pete"],["ee","see"],["ea","tea"],["y","happy"],["ey","key"]]},
+ {id:"i0",sym:"ĭ",kk:"ɪ",b:[62],c:1,lv:1,bg:BG.ye,no:"05",ow:"wish",
+  tip:"比 ē 低一點、放鬆，嘴角不拉。短促。",
+  sp:[["i","sit"]]},
+ {id:"a1",sym:"ā",kk:"e",b:[48],c:2,lv:2,bg:BG.gr,no:"02",ow:"rain",
+  tip:"從 ㄝ 滑到 ㄧ 的雙母音，嘴從半開收到扁。",
+  sp:[["a","baby"],["a_e","cake"],["ay","day"],["ai","rain"],["eigh","eight"]]},
+ {id:"e0",sym:"ĕ",kk:"ɛ",b:[45],c:3,lv:3,bg:BG.mi,no:"01",ow:"bless",
+  tip:"舌前、半開，下巴往下一指寬。",
+  sp:[["e","bed"],["ea","head"]]},
+ {id:"a0",sym:"ă",kk:"æ",b:[49],c:4,lv:4,bg:BG.la,no:"03",ow:"mass",
+  tip:"舌前、最低，嘴張大、嘴角也往兩側拉 — 是 ㄚ 和 ㄝ 的合體。",
+  sp:[["a","cat"]]},
+ {id:"i1",sym:"ī",kk:"aɪ",b:[51],c:5,lv:5,bg:BG.pe,no:"12",ow:"light",
+  tip:"從 ㄚ 滑到 ㄧ，嘴從大開收到扁。",
+  sp:[["i","hi"],["i_e","time"],["y","my"],["igh","light"],["ie","pie"]]},
+ {id:"o0",sym:"ŏ",kk:"ɑ",b:[46],c:6,lv:6,bg:BG.ye,no:"08",ow:"God",name:"喉後音",
+  tip:"山谷的最低點：舌後、最低，嘴張最大，聲音從喉嚨後面出來。",
+  sp:[["o","hot"]]},
+ {id:"aw",sym:"aw",kk:"ɔ",b:[46],c:7,lv:5,bg:BG.gr,no:"08",ow:"God",name:"喉後音",
+  tip:"比 ŏ 高一點，嘴唇開始收圓。積木和 ŏ 同為 46。",
+  sp:[["au","haul"],["aw","saw"]]},
+ {id:"u0",sym:"ŭ",kk:"ʌ",b:[44],c:8,lv:4,bg:BG.mi,no:"09",ow:"love",
+  tip:"舌偏後、放鬆，短短一聲 ㄜ。和 ə 用同一塊積木：重讀是 /ʌ/，弱讀是 /ə/。",
+  sp:[["u","cup"]]},
+ {id:"o1",sym:"ō",kk:"o",b:[64],c:9,lv:3,bg:BG.la,no:"07",ow:"hope",
+  tip:"嘴唇收圓，從 ㄜ 往 ㄨ 收，尾巴要收乾淨。",
+  sp:[["o","go"],["o_e","home"],["ow","snow"],["oa","boat"],["oe","toe"]]},
+ {id:"oo0",sym:"o͝o",kk:"ʊ",b:[63],c:10,lv:2,bg:BG.pk,no:"06",ow:"good",
+  tip:"舌後偏高但放鬆，嘴唇微圓，短促 — ㄜ 帶一點 ㄨ。",
+  sp:[["oo","book"]]},
+ {id:"u1",sym:"ū",kk:"u",b:[60],c:11,lv:1,bg:BG.ye,no:"14",ow:"tool",
+  tip:"舌後、最高，嘴唇圓而往前嘟。長而緊。",
+  sp:[["ue","blue"],["u_e","rule"],["oo","moon"]]},
+ {id:"yu",sym:"yū",kk:"ju",b:[59,60],c:12,lv:0,bg:BG.gr,no:"13",ow:"new",
+  tip:"先 ㄧ 再 ㄨ，兩塊積木：59＋60。",
+  sp:[["u","music"],["ue","cue"],["ew","new"]]}
+];
+var SCHWA={id:"sw",sym:"ə",kk:"ə",b:[44],c:6,lv:0,bg:BG.cy,no:"10",ow:"believe",name:"schwa",
+  tip:"正中央，舌頭、嘴唇、下巴全部放鬆。英語最常出現的母音，五個母音字母弱讀時都可能念成它。",
+  sp:[["a","about"],["e","taken"],["i","pencil"],["o","lemon"],["u","circus"]]};
+var SIDE_D=[
+ {id:"oi",sym:"oi",kk:"ɔɪ",b:[43,59],bg:BG.ye,no:"15",ow:"joy",tip:"從 ㄛ 滑到 ㄧ，兩塊積木：43＋59。",sp:[["oi","coin"],["oy","boy"]]},
+ {id:"ou",sym:"ou",kk:"aʊ",b:[50],bg:BG.gr,no:"04",ow:"proud",tip:"從 ㄚ 滑到 ㄨ，嘴從大開收圓。",sp:[["ou","out"],["ow","cow"]]}
+];
+var SIDE_R=[
+ {id:"ar",sym:"ar",kk:"ar",b:[46,47],bg:BG.mi,no:"20",ow:"star",tip:"ㄚ♥ 接 ㄦ：喉後音再捲舌。",sp:[["ar","star"]]},
+ {id:"er",sym:"er",kk:"ɝ",b:[47],bg:BG.la,no:"16",ow:"church",tip:"一塊 ㄦ。er、ir、ur 和 w 後面的 or 都念這個音。",sp:[["er","her"],["ir","bird"],["ur","turn"],["or","word"]]},
+ {id:"or",sym:"or",kk:"ɔr",b:[43,47],bg:BG.pk,no:"19",ow:"Lord",tip:"r 前面的 /ɔ/ 寫成 ㄛ（43），不是 ㄚ♥，再接 ㄦ。",sp:[["or","for"],["our","four"],["ore","more"]]}
+];
+var ALL=VAL.concat([SCHWA],SIDE_D,SIDE_R);
+function byId(id){ for(var i=0;i<ALL.length;i++) if(ALL[i].id===id) return ALL[i]; return null; }
+function bkey(v){ return v.b.join('+'); }
+function img(b){ return '<img src="'+BLK[b]+'" alt="積木 '+b+'">'; }
+function imgs(bs){ var h=''; for(var i=0;i<bs.length;i++) h+=img(bs[i]); return h; }
+function mini(v){ return '<span class="tile-mini" style="background:'+v.bg+'">'+imgs(v.b)+'</span>'; }
+function rand(a){ return a[Math.floor(Math.random()*a.length)]; }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+var vv=document.getElementById('vv'), lines=document.getElementById('vvLines'), scroller=document.getElementById('vvScroll');
+
+function cardHTML(v,cls){
+  var sp=''; for(var i=0;i<v.sp.length;i++) sp+='<span>'+esc(v.sp[i][0])+'</span>';
+  return '<button class="vc'+(cls||'')+'" data-v="'+v.id+'" aria-label="'+esc(v.sym+' /'+v.kk+'/ 積木 '+v.b.join('＋'))+'">'+
+    '<span class="vc-tile" style="background:'+v.bg+'">'+imgs(v.b)+'<span class="s">'+esc(v.sym)+'</span><span class="k">/'+esc(v.kk)+'/</span></span>'+
+    '<span class="vc-sp">'+sp+'</span></button>';
+}
+(function(){
+  var h='',i;
+  for(i=0;i<VAL.length;i++) h+=cardHTML(VAL[i]);
+  h+=cardHTML(SCHWA,' schwa');
+  vv.insertAdjacentHTML('beforeend',h);
+  var d='',r='';
+  for(i=0;i<SIDE_D.length;i++) d+=cardHTML(SIDE_D[i]);
+  for(i=0;i<SIDE_R.length;i++) r+=cardHTML(SIDE_R[i]);
+  document.getElementById('vvDiph').innerHTML=d;
+  document.getElementById('vvR').innerHTML=r;
+})();
+
+/* 依容器寬度排出山谷的高低，並畫出往 ə 的線 */
+function layout(){
+  var W=vv.clientWidth; if(!W) return;
+  var col=W/13, step=col*0.58, maxB=0;
+  var list=VAL.concat([SCHWA]);
+  for(var i=0;i<list.length;i++){
+    var el=vv.querySelector('.vc[data-v="'+list[i].id+'"]');
+    el.style.left=(list[i].c*col)+'px';
+    el.style.top=(list[i].lv*step+10)+'px';
+  }
+  for(var j=0;j<list.length;j++){
+    var e2=vv.querySelector('.vc[data-v="'+list[j].id+'"]');
+    maxB=Math.max(maxB,e2.offsetTop+e2.offsetHeight);
+  }
+  vv.style.height=(maxB+14)+'px';
+  /* 線 */
+  var base=vv.getBoundingClientRect(), sw=vv.querySelector('.vc.schwa .vc-tile').getBoundingClientRect();
+  var sx=sw.left+sw.width/2-base.left, sy=sw.top+sw.height/2-base.top, l='';
+  for(var k=0;k<VAL.length;k++){
+    var t=vv.querySelector('.vc[data-v="'+VAL[k].id+'"] .vc-tile').getBoundingClientRect();
+    l+='<line x1="'+(t.left+t.width/2-base.left).toFixed(1)+'" y1="'+(t.top+t.height/2-base.top).toFixed(1)+'" x2="'+sx.toFixed(1)+'" y2="'+sy.toFixed(1)+'"/>';
+  }
+  lines.setAttribute('viewBox','0 0 '+W+' '+vv.offsetHeight);
+  lines.innerHTML=l;
+  document.getElementById('vvHint').classList.toggle('on', scroller.scrollWidth>scroller.clientWidth+4);
+}
+var _lt=null;
+window.addEventListener('resize',function(){ clearTimeout(_lt); _lt=setTimeout(layout,120); });
+/* 分頁切到 10 時才有寬度，所以在切換後重排 */
+document.addEventListener('click',function(e){
+  var g=e.target.closest?e.target.closest('[data-go="p10"]'):null;
+  if(g) setTimeout(layout,30);
+});
+var imgsLoaded=vv.querySelectorAll('img');
+for(var q=0;q<imgsLoaded.length;q++) imgsLoaded[q].addEventListener('load',function(){ clearTimeout(_lt); _lt=setTimeout(layout,60); });
+setTimeout(layout,0);
+
+function showDetail(v){
+  var box=document.getElementById('vmDetail'), chips='';
+  for(var i=0;i<v.sp.length;i++) chips+='<button class="chip" data-say="'+esc(v.sp[i][1])+'" data-rate="0.8"><b style="font-family:system-ui">'+esc(v.sp[i][0])+'</b>　'+esc(v.sp[i][1])+'</button>';
+  box.innerHTML='<div class="vdetail"><span class="tile-mini" style="background:'+v.bg+';padding:8px">'+imgs(v.b).replace(/<img /g,'<img style="width:64px;height:64px" ')+'</span><div>'+
+    '<h3>'+esc(v.sym)+'<small>/'+esc(v.kk)+'/　積木 '+v.b.join('＋')+(v.name?'　'+esc(v.name):'')+'</small></h3>'+
+    '<p class="zh" style="margin:2px 0 0">44 SOUNDS 第 '+v.no+' 號　官方例字 <button class="chip" data-say="'+esc(v.ow)+'" data-rate="0.8">'+esc(v.ow)+'</button></p>'+
+    '<p style="margin:6px 0 0;font-size:14.5px">'+esc(v.tip)+'</p>'+
+    '<p class="zh" style="margin:8px 0 0">拼法與字例：</p><div class="chips" style="margin-top:4px">'+chips+'</div></div></div>';
+}
+showDetail(VAL[0]);
+vv.querySelector('.vc[data-v="e1"]').classList.add('sel');
+
+/* 顯示切換 */
+document.querySelector('#p10 .seg').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-face]'); if(!b) return;
+  setFace(b.getAttribute('data-face'));
+});
+function setFace(f){
+  vv.setAttribute('data-face',f);
+  var sides=document.querySelectorAll('#p10 .vv-side');
+  for(var i=0;i<sides.length;i++) sides[i].setAttribute('data-face',f);
+  var bs=document.querySelectorAll('#p10 .seg button[data-face]');
+  for(var j=0;j<bs.length;j++) bs[j].setAttribute('aria-pressed',bs[j].getAttribute('data-face')===f?'true':'false');
+  setTimeout(layout,20);
+}
+document.getElementById('vvRed').addEventListener('click',function(){
+  layout();
+  var on=vv.classList.toggle('show-red');
+  this.textContent=on?'隱藏弱化方向':'顯示弱化方向';
+  if(on) say('can, kun. at, ut. for, fer. to, tuh.',0.8);
+});
+
+/* 同拼法不同音 */
+(function(){
+  var TW=[["e","me","bed","e1","e0"],["ea","tea","head","e1","e0"],["a","cake","cat","a1","a0"],["i","time","sit","i1","i0"],
+          ["y","happy","my","e1","i1"],["o","go","hot","o1","o0"],["oo","moon","book","u1","oo0"],["u","music","cup","yu","u0"]];
+  var h='';
+  for(var i=0;i<TW.length;i++){
+    var a=byId(TW[i][3]), c=byId(TW[i][4]);
+    h+='<div class="dt" data-say="'+esc(TW[i][1]+'. '+TW[i][2]+'.')+'" data-rate="0.7"><span class="tw-sp">'+esc(TW[i][0])+'</span>'+
+       '<div class="imgs">'+mini(a)+mini(c)+'</div>'+
+       '<b>'+esc(TW[i][1])+' / '+esc(TW[i][2])+'</b><span>'+esc(a.sym)+' vs '+esc(c.sym)+'</span></div>';
+  }
+  document.getElementById('vvTwin').innerHTML=h;
+})();
+
+/* 最小對比 */
+(function(){
+  var PAIRS=[["sheep","ship","e1","i0"],["late","let","a1","e0"],["bed","bad","e0","a0"],["hat","hot","a0","o0"],
+             ["cup","cop","u0","o0"],["coat","caught","o1","aw"],["fool","full","u1","oo0"],["bird","bud","er","u0"]];
+  var p='';
+  for(var k=0;k<PAIRS.length;k++){
+    var a=byId(PAIRS[k][2]), c=byId(PAIRS[k][3]);
+    p+='<div class="dt" data-say="'+esc(PAIRS[k][0]+'. '+PAIRS[k][1]+'.')+'" data-rate="0.7"><div class="imgs">'+mini(a)+mini(c)+'</div>'+
+       '<b>'+esc(PAIRS[k][0])+' / '+esc(PAIRS[k][1])+'</b><span>/'+esc(a.kk)+'/ vs /'+esc(c.kk)+'/</span></div>';
+  }
+  document.getElementById('vmPairs').innerHTML=p;
+})();
+
+/* 44 SOUNDS 01–20 */
+(function(){
+  var D=[
+   {no:"01",kk:"ɛ",b:[45],t:"mono",w:"bless",m:"ĕ"},{no:"02",kk:"e",b:[48],t:"glide",w:"rain",m:"ā"},
+   {no:"03",kk:"æ",b:[49],t:"mono",w:"mass",m:"ă"},{no:"04",kk:"aʊ",b:[50],t:"glide",w:"proud",m:"ou"},
+   {no:"05",kk:"ɪ",b:[62],t:"mono",w:"wish",m:"ĭ"},{no:"06",kk:"ʊ",b:[63],t:"mono",w:"good",m:"o͝o"},
+   {no:"07",kk:"o",b:[64],t:"glide",w:"hope",m:"ō"},{no:"08",kk:"ɔ / ɑ",b:[46],t:"mono",w:"God",m:"aw · ŏ"},
+   {no:"09",kk:"ʌ",b:[44],t:"mono",w:"love",m:"ŭ"},{no:"10",kk:"ə",b:[44],t:"mono",w:"believe",m:"ə"},
+   {no:"11",kk:"i",b:[66],t:"mono",w:"tea",m:"ē"},{no:"12",kk:"aɪ",b:[51],t:"glide",w:"light",m:"ī"},
+   {no:"13",kk:"ju",b:[59,60],t:"glide",w:"new",m:"yū"},{no:"14",kk:"u",b:[60],t:"mono",w:"tool",m:"ū"},
+   {no:"15",kk:"ɔɪ",b:[43,59],t:"glide",w:"joy",m:"oi"},{no:"16",kk:"ɝ / ɚ",b:[47],t:"r",w:"church",m:"er"},
+   {no:"17",kk:"ɪr",b:[59,47],t:"r",w:"dear"},{no:"18",kk:"ɛr",b:[45,47],t:"r",w:"share"},
+   {no:"19",kk:"ɔr",b:[43,47],t:"r",w:"Lord",m:"or"},{no:"20",kk:"ar",b:[46,47],t:"r",w:"star",m:"ar"}];
+  var h='';
+  for(var i=0;i<D.length;i++){
+    var d=D[i];
+    h+='<div class="dt" data-t="'+d.t+'" data-say="'+esc(d.w)+'" data-rate="0.8">'+
+       '<span style="display:block;text-align:left;font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--weak)">'+d.no+'</span>'+
+       '<div class="imgs">'+imgs(d.b)+'</div>'+
+       '<b>/'+esc(d.kk)+'/</b><span style="font-family:Georgia,serif;font-size:15px;color:var(--ink)">'+esc(d.w)+'</span>'+
+       '<span style="display:block;font-size:11.5px">'+d.b.join(' ＋ ')+(d.m?'　山谷 '+esc(d.m):'')+'</span></div>';
+  }
+  document.getElementById('vmDiph').innerHTML=h;
+  var vf=document.querySelectorAll('[data-vf]');
+  for(var q=0;q<vf.length;q++) vf[q].addEventListener('click',function(){
+    var f=this.getAttribute('data-vf'), cards=document.querySelectorAll('#vmDiph .dt');
+    for(var c=0;c<cards.length;c++) cards[c].style.display=(f==='all'||cards[c].getAttribute('data-t')===f)?'':'none';
+    for(var r=0;r<vf.length;r++) vf[r].setAttribute('aria-pressed',vf[r]===this?'true':'false');
+  });
+})();
+
+/* ---------------- 遊戲 ---------------- */
+var G=null, gameBox=document.getElementById('vGame');
+var MODE_NAME={map:"聽音找格子",block:"聽字選積木",see:"看積木找格子",spell:"拼法歸位"};
+function bestText(){
+  var t=[],m;
+  for(m in MODE_NAME){ var b=LS.get('red_vv_'+m); if(b) t.push(MODE_NAME[m]+' '+b+'/10'); }
+  document.getElementById('vgBest').textContent=t.length?('最佳成績：'+t.join('　')):'';
+}
+bestText();
+function clearMarks(){
+  var bs=document.querySelectorAll('#p10 .vc');
+  for(var i=0;i<bs.length;i++) bs[i].classList.remove('ok','ng','hint','sel');
+}
+function setGaming(on){
+  vv.classList.toggle('gaming',on);
+  var s=document.querySelectorAll('#p10 .vv-side'); for(var i=0;i<s.length;i++) s[i].classList.toggle('gaming',on);
+  if(!on){ vv.classList.remove('hide-sp'); }
+}
+function scrollToCard(id){
+  var el=vv.querySelector('.vc[data-v="'+id+'"]'); if(!el) return;
+  scroller.scrollTo({left:Math.max(0,el.offsetLeft-scroller.clientWidth/2+el.offsetWidth/2),behavior:'smooth'});
+}
+function startGame(mode){
+  var qs=shuffle(VAL).slice(0,10).map(function(v){ var s=rand(v.sp); return {v:v,s:s[0],w:s[1]}; });
+  G={mode:mode,qs:qs,i:0,score:0,res:[],miss:[],locked:false};
+  vv.classList.remove('show-red'); document.getElementById('vvRed').textContent='顯示弱化方向';
+  setGaming(true);
+  vv.classList.toggle('hide-sp', mode==='spell');
+  /* 找格子時把格子換成長短音符號，避免直接看積木對答案 */
+  if(mode==='map') setFace('sym');
+  else if(mode==='see') setFace('sym');
+  else if(mode==='spell') setFace('block');
+  gameBox.style.display='block';
+  var wrap=document.getElementById('vvHint'), home=document.getElementById('vgBest');
+  if(mode==='block'){ home.parentNode.insertBefore(gameBox,home.nextSibling); }
+  else { wrap.parentNode.insertBefore(gameBox,wrap); }
+  var btns=document.querySelectorAll('#p10 .btnrow [data-vgame]');
+  for(var i=0;i<btns.length;i++) btns[i].classList.toggle('solid',btns[i].getAttribute('data-vgame')===mode);
+  paintQ();
+  gameBox.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function dots(){
+  var h='';
+  for(var i=0;i<10;i++){ var r=G.res[i]; h+='<i class="'+(r===true?'ok':r===false?'ng':(i===G.i?'cur':''))+'"></i>'; }
+  return '<div class="gdots">'+h+'</div>';
+}
+function paintQ(){
+  clearMarks(); G.locked=false;
+  var q=G.qs[G.i], body='';
+  if(G.mode==='see'){
+    body='<div class="game-prompt">'+mini(q.v)+'<div><b>這塊積木在山谷的哪一格？</b><br><span class="zh">格子現在顯示長短音符號，點出位置。</span></div></div>';
+  }else if(G.mode==='spell'){
+    body='<div class="game-prompt"><div class="spell-q">'+esc(q.s)+'<small>在 <b>'+esc(q.w)+'</b> 裡念哪個母音？</small></div></div>'+
+         '<p class="zh" style="margin:0">格子下面的拼法先藏起來了，點出這個音所在的格子。</p>';
+  }else{
+    body='<div class="game-prompt"><button class="bigplay" id="vgPlay" aria-label="再聽一次">🔊</button><div><b>'+
+      (G.mode==='map'?'這個字的母音在山谷的哪一格？':'這個字的母音是哪一塊積木？')+'</b><br><span class="zh">'+
+      (G.mode==='map'?'點出格子。':'從下面四個選一個。')+'</span></div></div>';
+    if(G.mode==='block'){
+      var pool=[bkey(q.v)], cands=shuffle(VAL), objs=[q.v];
+      for(var i=0;i<cands.length && pool.length<4;i++){ var k=bkey(cands[i]); if(pool.indexOf(k)<0){ pool.push(k); objs.push(cands[i]); } }
+      objs=shuffle(objs);
+      body+='<div class="bchoices">';
+      for(var j=0;j<objs.length;j++) body+='<button class="bchoice" data-bc="'+bkey(objs[j])+'" data-bv="'+objs[j].id+'" style="background:'+objs[j].bg+'">'+imgs(objs[j].b)+'</button>';
+      body+='</div>';
+    }
+  }
+  gameBox.innerHTML='<div class="game-top"><span class="game-count">'+G.i+' / 10</span>'+
+    '<span class="zh">'+MODE_NAME[G.mode]+'</span><button class="btn ghost sm" id="vgStop">結束</button></div>'+dots()+body+
+    '<p class="zh" id="vgFb" style="min-height:1.6em;margin:10px 0 0"></p>'+
+    '<div class="btnrow" id="vgNextRow" style="display:none"><button class="btn solid" id="vgNext">下一題 →</button></div>';
+  if(G.mode==='map'||G.mode==='block') setTimeout(function(){ say(q.w,0.75); },250);
+}
+function answer(ok,chosenId){
+  var q=G.qs[G.i];
+  G.locked=true; G.res[G.i]=ok;
+  if(ok) G.score++; else G.miss.push({t:q.v.id,c:chosenId,w:q.w,s:q.s});
+  document.getElementById('vgFb').innerHTML=(ok?'<b style="color:var(--weak)">答對！</b>　':'<b style="color:#B4432F">再看一次。</b>　')+
+    '<b>'+esc(q.w)+'</b> 的 '+esc(q.s)+' 念 '+esc(q.v.sym)+' /'+esc(q.v.kk)+'/，積木 '+q.v.b.join('＋')+'。 '+
+    '<button class="spk" data-say="'+esc(q.w)+'" data-rate="0.7">🔊</button>';
+  document.querySelector('#vGame .game-count').textContent=(G.i+1)+' / 10';
+  document.querySelector('#vGame .gdots').outerHTML=dots();
+  document.getElementById('vgNextRow').style.display='flex';
+  document.getElementById('vgNext').textContent = G.i===9 ? '看結果 →' : '下一題 →';
+  if(G.mode==='see'||G.mode==='spell') say(q.w,0.75);
+  if(!ok) scrollToCard(q.v.id);
+}
+function finish(){
+  setGaming(false); clearMarks(); setFace('block');
+  var best=parseInt(LS.get('red_vv_'+G.mode)||'0',10);
+  if(G.score>best) LS.set('red_vv_'+G.mode,String(G.score));
+  bestText();
+  var conf='';
+  if(!G.miss.length){
+    conf='<div class="empty" style="padding:14px"><b>全對</b>可以換另一種模式，或到下方「同一個拼法，不同的音」練拼法。</div>';
+  }else{
+    for(var i=0;i<G.miss.length;i++){
+      var m=G.miss[i], t=byId(m.t), c=m.c?byId(m.c):null;
+      conf+='<div class="confuse">'+mini(t)+'<span><b>'+esc(m.w)+'</b>（'+esc(m.s)+'）　'+esc(t.sym)+' /'+esc(t.kk)+'/</span>'+
+        '<button class="spk" data-say="'+esc(m.w)+'" data-rate="0.7">🔊</button>'+
+        (c?'<span class="x"><b>✕</b> 你選了 '+mini(c)+esc(c.sym)+' /'+esc(c.kk)+'/</span>':'')+'</div>';
+    }
+  }
+  gameBox.innerHTML='<div class="game-top"><span class="game-count">'+G.score+' / 10</span><span class="zh">'+MODE_NAME[G.mode]+' 完成</span></div>'+
+    dots()+'<h3 style="margin:16px 0 4px;font-size:16px">易混對</h3>'+conf+
+    '<div class="btnrow"><button class="btn solid" data-vgame="'+G.mode+'">再玩一次</button></div>';
+  G=null;
+}
+
+document.addEventListener('click',function(e){
+  if(!e.target.closest) return;
+  var gb=e.target.closest('[data-vgame]');
+  if(gb){ startGame(gb.getAttribute('data-vgame')); return; }
+  if(e.target.closest('#vgPlay') && G){ say(G.qs[G.i].w,0.75); return; }
+  if(e.target.closest('#vgNext') && G){ G.i++; if(G.i>=10) finish(); else paintQ(); return; }
+  if(e.target.closest('#vgStop') && G){
+    setGaming(false); clearMarks(); setFace('block'); gameBox.style.display='none'; G=null; return;
+  }
+  var bc=e.target.closest('.bchoice');
+  if(bc && G && !G.locked && G.mode==='block'){
+    var q=G.qs[G.i], key=bc.getAttribute('data-bc'), ok=(key===bkey(q.v));
+    var all=gameBox.querySelectorAll('.bchoice');
+    for(var i=0;i<all.length;i++){
+      if(all[i].getAttribute('data-bc')===bkey(q.v)) all[i].classList.add(ok?'ok':'hint');
+      else if(all[i]===bc) all[i].classList.add('ng');
+    }
+    answer(ok, ok?null:bc.getAttribute('data-bv')); return;
+  }
+  var vc=e.target.closest('#p10 .vc');
+  if(vc){
+    var id=vc.getAttribute('data-v'), v=byId(id);
+    if(G){
+      if(G.locked || G.mode==='block' || !vc.closest('#vv')) return;
+      var q2=G.qs[G.i];
+      var ok2=(id===q2.v.id) || (G.mode==='see' && bkey(v)===bkey(q2.v));  /* 看積木：46、44 兩格都算對 */
+      vc.classList.add(ok2?'ok':'ng');
+      if(!ok2){ var right=vv.querySelector('.vc[data-v="'+q2.v.id+'"]'); if(right) right.classList.add('hint'); }
+      answer(ok2, ok2?null:id); return;
+    }
+    clearMarks(); vc.classList.add('sel'); showDetail(v);
+    var w=[]; for(var k=0;k<v.sp.length && k<3;k++) w.push(v.sp[k][1]);
+    say(w.join(', '),0.8);
+    document.getElementById('vmDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+});
+})();
+
+/* ---- 版面：表格橫向捲動包裹 ---- */
+(function(){
+  var tbls=document.querySelectorAll('.tbl');
+  for(var i=0;i<tbls.length;i++){
+    var t=tbls[i];
+    if(t.parentNode && t.parentNode.classList && t.parentNode.classList.contains('tblwrap')) continue;
+    var w=document.createElement('div'); w.className='tblwrap';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  }
+})();
+
+/* ---- 版面：每個分頁底部的上一單元／下一單元 ---- */
+(function(){
+  var order=[],names={},i;
+  for(i=0;i<tabBtns.length;i++){
+    var id=tabBtns[i].getAttribute('data-go');
+    order.push(id);
+    names[id]=tabBtns[i].textContent.replace(/^\d+/,'').trim();
+  }
+  for(i=0;i<order.length;i++){
+    var panel=document.getElementById(order[i]);
+    if(!panel) continue;
+    var nav=document.createElement('div'); nav.className='pnav';
+    var prev=order[i-1], next=order[i+1], html='';
+    if(prev) html+='<button data-go="'+prev+'"><span class="k">← 上一單元</span>'+names[prev]+'</button>';
+    if(next) html+='<button class="next" data-go="'+next+'"><span class="k">下一單元 →</span>'+names[next]+'</button>';
+    nav.innerHTML=html;
+    panel.appendChild(nav);
+  }
+})();
+
+/* ---- 鍵盤：左右方向鍵切換分頁（焦點在頁籤列時） ---- */
+document.querySelector('nav.tabs').addEventListener('keydown',function(e){
+  if(e.key!=='ArrowLeft' && e.key!=='ArrowRight') return;
+  var cur=-1,i;
+  for(i=0;i<tabBtns.length;i++){ if(tabBtns[i].getAttribute('aria-selected')==='true') cur=i; }
+  var nx=cur+(e.key==='ArrowRight'?1:-1);
+  if(nx<0||nx>=tabBtns.length) return;
+  goTab(tabBtns[nx].getAttribute('data-go'));
+  tabBtns[nx].focus();
+  e.preventDefault();
+});
+
+document.getElementById('stamp').textContent='build '+today();
+})();
+</script>
+</body>
+</html>
